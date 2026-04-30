@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USJ お肉グルメガイド 🍖</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: #1a0a00;
+      color: #fff3e0;
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 40%, #b45309 100%);
+      padding: 2rem 1.4rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "🔥";
+      font-size: 8rem;
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    header::after {
+      content: "🍖";
+      font-size: 8rem;
+      position: absolute;
+      bottom: -2rem;
+      right: -1rem;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,0.3);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .header-text { flex: 1; }
+    .greeting {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 0.3rem;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      line-height: 1.25;
+      margin-bottom: 0.4rem;
+    }
+    .header-sub {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    /* ===== MAP SECTION ===== */
+    .map-section {
+      padding: 2rem 1rem;
+      background: #0f0500;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fb923c;
+      text-align: center;
+      margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
+    #map {
+      width: 100%;
+      height: 340px;
+      border-radius: 16px;
+      border: 2px solid #7f1d1d;
+      box-shadow: 0 4px 24px rgba(251,146,60,0.2);
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      background: #2d1200;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .legend-item:hover { background: #4a1a00; }
+    .badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOD CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #2d1200;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(251,146,60,0.2);
+    }
+
+    /* Image area */
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #1a0a00;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #6b3a1f;
+      font-size: 0.85rem;
+    }
+    .card-img-placeholder span { font-size: 3rem; }
+
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+    .card-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(220,38,38,0.5);
+    }
+    .card-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      flex: 1;
+    }
+    .card-price {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fb923c;
+      white-space: nowrap;
+    }
+
+    .card-location {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      background: #1a0800;
+      border-radius: 10px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #fcd34d;
+    }
+    .card-location-icon { flex-shrink: 0; margin-top: 1px; }
+
+    .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #9ca3af;
+      border-left: 2px solid #4b2020;
+      padding-left: 0.7rem;
+      white-space: pre-line;
+    }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .author-tag {
+      display: inline-block;
+      background: #3d1500;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.78rem;
+      color: #fb923c;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .intro-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 1rem 0 0.5rem;
+      line-height: 1.4;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      text-align: center;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      padding: 1.4rem 1rem;
+      color: #fb923c;
+      opacity: 0.7;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .lead-in {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fb923c;
+      padding: 0.5rem 1rem 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .outro-tip {
+      background: #2d1200;
+      border: 1px solid #7f1d1d;
+      border-radius: 16px;
+      padding: 1.1rem 1.3rem;
+      margin: 1.2rem 0;
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .outro-tip-title {
+      font-weight: 900;
+      color: #fb923c;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff3e0;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.78rem;
+      color: #fb923c;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.78rem;
+      color: #6b3a1f;
+      border-top: 1px solid #2d1200;
+    }
+
+    /* ===== LEAFLET POPUP CUSTOM ===== */
+    .leaflet-popup-content-wrapper {
+      background: #2d1200;
+      color: #fff3e0;
+      border: 1px solid #dc2626;
+      border-radius: 12px;
+    }
+    .leaflet-popup-tip { background: #2d1200; }
+    .leaflet-popup-content { font-size: 0.85rem; line-height: 1.5; }
+    .popup-name { font-weight: 900; font-size: 1rem; color: #fb923c; }
+    .popup-price { color: #fcd34d; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">お疲れ様です！🙋‍♀️</p>
+      <h1>USJお肉フードガイド</h1>
+      <p class="header-sub">パークには欠かせない!! 🔥🔥<br>お肉の紹介ですー!! 🥰✨✨</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">ユニバは最近色んなお肉のフードカートがありまして🤤
+レストランは別でフードかーとに絞ってご紹介します！☺️
+改めてまとめてみるとやっぱりジュラパエリアはお肉激戦区でした！</p>
+</section>
+
+<div class="separator">🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗</div>
+<p class="lead-in">⬇️　ではではさっそくどーぞー!!　⬇️</p>
+
+<!-- MAP -->
+<section class="map-section">
+  <p class="section-title">📍 販売場所マップ</p>
+  <div id="map"></div>
+  <div class="map-legend" id="legend"></div>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section">
+
+  <!-- ① チャイニーズポークリブ -->
+  <article class="card" id="card-1">
+    <img class="card-img" src="images/chinese-pork-rib.png" alt="チャイニーズポークリブ">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">①</div>
+        <div class="card-name">チャイニーズポークリブ</div>
+        <div class="card-price">¥1,000</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>サンフランシスコスナック（ドラゴンズパール横）<br>ミニオンエリアからジュラパエリアに向けて進んでいくと左に赤い中華系の建物がありますのでそのすぐ隣です！</span>
+      </div>
+      <div class="card-desc">ドラゴンズパール横のサンフランシスコスナックで販売中の骨付きリブ！
+甘めの味に八角の風味がします！
+ええとこのスペアリブみたいな感じです☆</div>
+    </div>
+  </article>
+
+  <!-- ② ターキーレッグ -->
+  <article class="card" id="card-2">
+    <img class="card-img" src="images/turkey-leg.png" alt="ターキーレッグ">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">②</div>
+        <div class="card-name">ターキーレッグ</div>
+        <div class="card-price">¥1,400</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>スプラッシュダウンスナック（ジュラシックパークエリア）</span>
+      </div>
+      <div class="card-desc">ユニバといえばのフード！チョコが子供の時からあったお肉です🍗
+ジュラパエリアのスプラッシュダウンスナックで販売中です！
+子供の頃は肉の塊ってだけでテンション上がっておりましたが、大人になって食べると改めて美味しい！😋✨
+以外にアブラっこくなくてスモーキー！</div>
+      <div class="card-note">※もしかしたらフライングダイナソー寄りのフォッシュフェールズでもお肉があるかも👀
+前までファミチキのでかいの売ってましたがしれっと消えたと情報入っております‥（リア友情報）</div>
+    </div>
+  </article>
+
+  <!-- ③ ブラックペッパーポークリブ -->
+  <article class="card" id="card-3">
+    <img class="card-img" src="images/black-pepper-rib.png" alt="ブラックペッパーポークリブ">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">③</div>
+        <div class="card-name">ブラックペッパーポークリブ</div>
+        <div class="card-price">¥1,000</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>サバイバルスナック（ジュラシックパークエリア奥・マリオ側）</span>
+      </div>
+      <div class="card-desc">ジュラパエリアの奥（マリオ側）にあるサバイバルスナックで販売中のお肉です！
+お肉自体は①のチャイニーズポークリブと同じなのですが、味がぜんっぜん違います！！
+味はシンプルですがブラックペッパーを噛んだ時のピリ辛とお肉の甘みがちゃんと感じられます！
+①よりこっちの方がアブラ感はあるかも👀</div>
+    </div>
+  </article>
+
+  <!-- ④ サメのエジキ -->
+  <article class="card" id="card-4">
+    <img class="card-img" src="images/shark-sausage.png" alt="サメのエジキ">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">④</div>
+        <div class="card-name">サメのエジキ</div>
+        <div class="card-price">¥1,000</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>シャークスナック（ジュラシックパークエリアをマリオ側に抜けてジョーズ方面）</span>
+      </div>
+      <div class="card-desc">ジュラパエリアをマリオ側に抜けまして、ジューズの方に向かったところにあるシャークスナックで販売中です！
+上の３つとは違って粗挽きソーセージです！🍖
+ちょっとスモーキーで噛むとパリッって音がする🥺
+粗挽きソーセージですが割とアブラは軽めで骨にぶっ刺さってるので食べやすいです😋</div>
+    </div>
+  </article>
+
+  <!-- ⑤ スモークチキン -->
+  <article class="card" id="card-5">
+    <img class="card-img" src="images/smoke-chicken.png" alt="スモークチキン">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">⑤</div>
+        <div class="card-name">スモークチキン</div>
+        <div class="card-price">¥1,300</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>アミティースナック（④シャークスナックのほぼ左斜め前）</span>
+      </div>
+      <div class="card-desc">サメのエジキのほぼ左斜め前、アミティースナックで販売中です！
+プルップルッの飲める鶏肉です🤤
+桜チップでスモークされていてしっかり匂いもする！
+1番アブラはすごいかも👀
+可食部も多くて結構お腹いっぱいになります！</div>
+    </div>
+  </article>
+
+</section>
+
+<div class="separator">🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+
+  <div class="outro-tip">
+    <div class="outro-tip-title">🥧 番外編：ビーフミートパイ</div>比較的肉多めのハリーポッター前のビーフミートパイも個人的には捨てがたい🥺
+お肉ってよりはパイですが美味しいので食べてみてください☺️
+⚠️熱いので食べるとき注意😅</div>
+
+  <p class="outro-text">夏になると徐々にフードも冷凍フルーツが多めに切り替わってくるので（目移り多くなっちゃう😅）
+今のうちにみんなで肉フェスやりましょう!!💪🔥</p>
+
+  <div class="outro-tip">
+    <div class="outro-tip-title">🍺 お酒もあるよ！</div>ちなみに👀
+フードカートでもお酒は販売されております！
+カートごとに缶ビールか生ビールかの記載もちゃんとありますので是非お肉と一緒に楽しんでみてください☺️</div>
+
+  <div class="sign-off">
+    以上<br>
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコでした！🙌
+  </div>
+
+</section>
+
+<footer>
+  ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+<script>
+  // USJ中心座標
+  const USJ_CENTER = [34.6654, 135.4323];
+
+  const spots = [
+    {
+      id: 1,
+      name: "① チャイニーズポークリブ",
+      snack: "サンフランシスコスナック",
+      price: "¥1,000",
+      latlng: [34.6664, 135.4308],
+      emoji: "🍖"
+    },
+    {
+      id: 2,
+      name: "② ターキーレッグ",
+      snack: "スプラッシュダウンスナック",
+      price: "¥1,400",
+      latlng: [34.6645, 135.4340],
+      emoji: "🍗"
+    },
+    {
+      id: 3,
+      name: "③ ブラックペッパーポークリブ",
+      snack: "サバイバルスナック",
+      price: "¥1,000",
+      latlng: [34.6638, 135.4348],
+      emoji: "🥩"
+    },
+    {
+      id: 4,
+      name: "④ サメのエジキ",
+      snack: "シャークスナック",
+      price: "¥1,000",
+      latlng: [34.6635, 135.4333],
+      emoji: "🍖"
+    },
+    {
+      id: 5,
+      name: "⑤ スモークチキン",
+      snack: "アミティースナック",
+      price: "¥1,300",
+      latlng: [34.6632, 135.4328],
+      emoji: "🐔"
+    }
+  ];
+
+  // Create map
+  const map = L.map('map', { zoomControl: true }).setView(USJ_CENTER, 17);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Custom numbered icon
+  function makeIcon(num) {
+    return L.divIcon({
+      html: `<div style="
+        width:32px;height:32px;border-radius:50%;
+        background:#dc2626;color:#fff;
+        font-size:13px;font-weight:900;
+        display:flex;align-items:center;justify-content:center;
+        border:3px solid #fff;
+        box-shadow:0 2px 8px rgba(0,0,0,0.5);
+        font-family:-apple-system,sans-serif;
+      ">${num}</div>`,
+      className: '',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -18]
+    });
+  }
+
+  const markers = [];
+
+  spots.forEach(s => {
+    const marker = L.marker(s.latlng, { icon: makeIcon(s.id) })
+      .addTo(map)
+      .bindPopup(`
+        <div class="popup-name">${s.emoji} ${s.name}</div>
+        <div style="margin:4px 0 2px;opacity:0.8;">${s.snack}</div>
+        <div class="popup-price">${s.price}</div>
+      `);
+    markers.push(marker);
+
+    // Legend
+    const legend = document.getElementById('legend');
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="badge">${s.id}</span>${s.name.slice(2)}`;
+    item.addEventListener('click', () => {
+      map.setView(s.latlng, 18);
+      marker.openPopup();
+    });
+    legend.appendChild(item);
+  });
+</script>
+</body>
+</html>
