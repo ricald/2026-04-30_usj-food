@@ -9,40 +9,43 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      background-color: #0c0400;
+      background-color: #fdf5f9;
       background-image:
-        radial-gradient(ellipse 60% 40% at 10% 10%, rgba(180,83,9,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(153,27,27,0.15) 0%, transparent 60%);
-      color: #fef3c7;
+        radial-gradient(ellipse 60% 40% at 10% 10%, rgba(212,101,154,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(201,169,110,0.06) 0%, transparent 60%);
+      color: #3d2830;
       min-height: 100vh;
     }
 
     /* ===== HERO ===== */
     .hero {
       background:
-        radial-gradient(ellipse at top right, rgba(251,146,60,0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom left, rgba(153,27,27,0.35) 0%, transparent 50%),
-        linear-gradient(145deg, #1c0700 0%, #3d1400 50%, #5c1d00 100%);
+        radial-gradient(ellipse at top right, rgba(212,101,154,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(201,169,110,0.18) 0%, transparent 50%),
+        linear-gradient(145deg, #fef0f6 0%, #fce4ef 50%, #fde8f2 100%);
       padding: 2.8rem 1.4rem 2.2rem;
       position: relative;
       overflow: hidden;
       text-align: center;
+      border-bottom: 1px solid rgba(212,101,154,0.12);
     }
     .hero::before {
-      content: "🍖";
+      content: "♡";
       font-size: 10rem;
       position: absolute;
       top: -2rem; left: -1.5rem;
       opacity: 0.06;
       pointer-events: none;
+      line-height: 1;
     }
     .hero::after {
-      content: "🍫";
+      content: "✧";
       font-size: 10rem;
       position: absolute;
       bottom: -2.5rem; right: -1.5rem;
       opacity: 0.06;
       pointer-events: none;
+      line-height: 1;
     }
     .hero-inner {
       max-width: 480px;
@@ -55,8 +58,8 @@
       border-radius: 20px;
       object-fit: cover;
       object-position: center top;
-      border: 2px solid rgba(255,255,255,0.15);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(251,146,60,0.25);
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 32px rgba(212,101,154,0.2), 0 0 0 3px rgba(212,101,154,0.12);
       margin-bottom: 1rem;
     }
     .hero h1 {
@@ -65,7 +68,7 @@
       letter-spacing: 0.04em;
       line-height: 1.3;
       margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #fef9ee 0%, #fbbf24 55%, #fb923c 100%);
+      background: linear-gradient(135deg, #d4659a 0%, #c9a96e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -73,7 +76,7 @@
     .hero-desc {
       font-size: 0.88rem;
       line-height: 1.7;
-      color: #fed7aa;
+      color: #9a7080;
       opacity: 0.9;
     }
     .hero-role {
@@ -81,14 +84,14 @@
       margin-top: 0.9rem;
       font-size: 0.72rem;
       background:
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)) padding-box,
-        linear-gradient(135deg, rgba(251,146,60,0.3), rgba(127,29,29,0.2)) border-box;
+        linear-gradient(#fffbfd, #fdf5f9) padding-box,
+        linear-gradient(135deg, rgba(212,101,154,0.3), rgba(201,169,110,0.2)) border-box;
       border: 1px solid transparent;
       border-radius: 20px;
       padding: 0.32rem 0.9rem;
       letter-spacing: 0.04em;
-      color: #fde8cc;
-      opacity: 0.85;
+      color: #c97a8a;
+      opacity: 0.9;
     }
 
     /* ===== ARTICLE LIST ===== */
@@ -100,7 +103,7 @@
     .list-title {
       font-size: 0.72rem;
       font-weight: 700;
-      color: #fb923c;
+      color: #d4659a;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-bottom: 1.4rem;
@@ -113,26 +116,24 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, rgba(251,146,60,0.4), transparent);
+      background: linear-gradient(90deg, rgba(212,101,154,0.35), transparent);
     }
 
     .article-card {
       display: block;
       text-decoration: none;
       color: inherit;
-      background:
-        linear-gradient(#1e0900, #261100) padding-box,
-        linear-gradient(145deg, rgba(251,146,60,0.4), rgba(127,29,29,0.2) 50%, rgba(251,191,36,0.12)) border-box;
-      border: 1px solid transparent;
+      background: #ffffff;
+      border: 1px solid rgba(212,101,154,0.18);
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 1.4rem;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.4), inset 0 1px 0 rgba(251,146,60,0.05);
+      box-shadow: 0 4px 20px rgba(212,101,154,0.08), 0 2px 6px rgba(0,0,0,0.04);
       transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
     }
     .article-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 20px rgba(251,146,60,0.18), 0 0 0 1px rgba(251,146,60,0.2);
+      box-shadow: 0 12px 36px rgba(212,101,154,0.14), 0 4px 12px rgba(0,0,0,0.06);
     }
     .article-thumb {
       width: 100%;
@@ -151,8 +152,8 @@
     }
     .article-tag {
       display: inline-block;
-      background: linear-gradient(135deg, #7f1d1d, #9a3412);
-      color: #fcd34d;
+      background: linear-gradient(135deg, #d4659a, #c94a70);
+      color: #fff;
       font-size: 0.7rem;
       font-weight: 900;
       padding: 0.2rem 0.65rem;
@@ -161,22 +162,19 @@
     }
     .article-date {
       font-size: 0.74rem;
-      color: #78716c;
+      color: #c4a4a4;
     }
     .article-title {
       font-size: 1.08rem;
       font-weight: 900;
       line-height: 1.4;
       margin-bottom: 0.4rem;
-      background: linear-gradient(135deg, #fef3c7, #fde8cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #3d2830;
     }
     .article-summary {
       font-size: 0.82rem;
       line-height: 1.7;
-      color: #b08060;
+      color: #9a7880;
     }
     .article-arrow {
       display: flex;
@@ -184,7 +182,7 @@
       align-items: center;
       margin-top: 0.7rem;
       font-size: 0.8rem;
-      color: #fb923c;
+      color: #d4659a;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
@@ -194,9 +192,9 @@
       text-align: center;
       padding: 1.8rem 1rem;
       font-size: 0.76rem;
-      color: #5c3010;
-      border-top: 1px solid rgba(251,146,60,0.1);
-      background: rgba(10,3,0,0.6);
+      color: #c4a4b4;
+      border-top: 1px solid rgba(212,101,154,0.1);
+      background: rgba(253,244,249,0.5);
     }
     .footer-credits {
       max-width: 480px;
@@ -204,10 +202,10 @@
       text-align: left;
       font-size: 0.7rem;
       line-height: 1.9;
-      color: #6b4c30;
+      color: #c4a4b4;
     }
-    .footer-credits a { color: #78716c; text-decoration: underline; }
-    .footer-credits a:hover { color: #a8a29e; }
+    .footer-credits a { color: #b09090; text-decoration: underline; }
+    .footer-credits a:hover { color: #8c6a6a; }
   </style>
 </head>
 <body>
@@ -246,6 +244,7 @@
     <div class="article-card-body">
       <div class="article-meta">
         <span class="article-tag">🍫 チュリトス</span>
+        <span class="article-date">2026/05/01 10:59</span>
       </div>
       <div class="article-title">チュリトス＆25周年コラボフード</div>
       <div class="article-summary">コラボチュリトスが大集合！🧡 アルトバイエルンドッグ・マヨマヨコーンマン・31コラボチュリトスなど、25周年ならではのユニークフードを一挙紹介✨</div>
@@ -259,6 +258,7 @@
     <div class="article-card-body">
       <div class="article-meta">
         <span class="article-tag">🍽️ レストラン</span>
+        <span class="article-date">2026/05/02 20:58</span>
       </div>
       <div class="article-title">25周年レストラン編</div>
       <div class="article-summary">レストランもコンプしたくなるフード満載！😆 メルズドライブイン・パークサイドグリル・ルイズピザ・スヌーピーカフェなど25周年コラボのレストランフードをご紹介✨</div>

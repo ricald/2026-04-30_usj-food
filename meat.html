@@ -11,60 +11,63 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
-      background-color: #0c0400;
+      background-color: #fdf5f6;
       background-image:
-        radial-gradient(ellipse 60% 40% at 10% 10%, rgba(180,83,9,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(153,27,27,0.15) 0%, transparent 60%);
-      color: #fef3c7;
+        radial-gradient(ellipse 60% 40% at 5% 0%, rgba(201,74,94,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 95% 100%, rgba(201,169,110,0.06) 0%, transparent 55%);
+      color: #3d2828;
       min-height: 100vh;
     }
 
     /* ===== TOP NAV ===== */
     .top-nav {
-      background: rgba(12,4,0,0.85);
+      background: rgba(253,240,242,0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 0.7rem 1.4rem;
-      border-bottom: 1px solid rgba(249,115,22,0.15);
+      border-bottom: 1px solid rgba(201,74,94,0.18);
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .top-nav a {
-      color: #fb923c;
+      color: #c94a5e;
       text-decoration: none;
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.02em;
       transition: color 0.2s;
     }
-    .top-nav a:hover { color: #fbbf24; }
+    .top-nav a:hover { color: #b83850; }
 
     /* ===== HEADER ===== */
     header {
       background:
-        radial-gradient(ellipse at top right, rgba(251,146,60,0.25) 0%, transparent 55%),
-        radial-gradient(ellipse at bottom left, rgba(153,27,27,0.35) 0%, transparent 55%),
-        linear-gradient(145deg, #1c0700 0%, #3d1400 50%, #5c1d00 100%);
+        radial-gradient(ellipse at top right, rgba(201,74,94,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(201,169,110,0.18) 0%, transparent 55%),
+        linear-gradient(145deg, #fef2f4 0%, #fde8ec 50%, #fde4ea 100%);
       padding: 2.2rem 1.4rem 2rem;
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid rgba(201,74,94,0.1);
     }
     header::before {
-      content: "🔥";
+      content: "♡";
       font-size: 9rem;
       position: absolute;
       top: -1.5rem; left: -1.5rem;
       opacity: 0.07;
       pointer-events: none;
+      line-height: 1;
     }
     header::after {
-      content: "🍖";
+      content: "✧";
       font-size: 9rem;
       position: absolute;
       bottom: -2rem; right: -1rem;
       opacity: 0.07;
       pointer-events: none;
+      line-height: 1;
     }
     .header-inner {
       display: flex;
@@ -81,24 +84,24 @@
       object-fit: cover;
       object-position: center top;
       flex-shrink: 0;
-      border: 2px solid rgba(255,255,255,0.15);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(251,146,60,0.2);
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(201,74,94,0.2), 0 0 0 3px rgba(201,74,94,0.1);
     }
     .header-text { flex: 1; }
-    .greeting { font-size: 0.82rem; color: #fed7aa; margin-bottom: 0.25rem; opacity: 0.9; }
+    .greeting { font-size: 0.82rem; color: #8c6060; margin-bottom: 0.25rem; }
     header h1 {
       font-size: 1.5rem;
       font-weight: 900;
       letter-spacing: 0.02em;
       line-height: 1.2;
       margin-bottom: 0.35rem;
-      background: linear-gradient(135deg, #fef9ee 0%, #fbbf24 60%, #fb923c 100%);
+      background: linear-gradient(135deg, #c94a5e 0%, #c9a96e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #fed7aa; opacity: 0.9; }
-    .post-date { margin-top: 0.5rem; font-size: 0.72rem; opacity: 0.5; letter-spacing: 0.06em; color: #fde8cc; }
+    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #8c6060; }
+    .post-date { margin-top: 0.5rem; font-size: 0.72rem; color: #b09090; opacity: 0.85; letter-spacing: 0.06em; }
 
     /* ===== INTRO ===== */
     .intro-section {
@@ -109,31 +112,39 @@
     .author-tag {
       display: inline-block;
       background:
-        linear-gradient(#1e0a00, #2a1100) padding-box,
-        linear-gradient(135deg, rgba(251,146,60,0.4), rgba(127,29,29,0.3)) border-box;
+        linear-gradient(#fffbfc, #fdf5f6) padding-box,
+        linear-gradient(135deg, rgba(201,74,94,0.35), rgba(201,169,110,0.25)) border-box;
       border: 1px solid transparent;
       border-radius: 20px;
       padding: 0.35rem 0.9rem;
       font-size: 0.78rem;
-      color: #fb923c;
+      color: #c94a5e;
       margin-bottom: 1rem;
       letter-spacing: 0.03em;
     }
     .intro-text {
       font-size: 0.95rem;
       line-height: 2;
-      color: #fde8cc;
+      color: #5a3a3a;
       white-space: pre-line;
     }
     .intro-title {
       font-size: 1.5rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #fef9ee, #fbbf24 60%, #fb923c);
+      background: linear-gradient(135deg, #c94a5e, #c9a96e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin: 1rem 0 0.5rem;
       line-height: 1.4;
+    }
+
+    /* ===== SLANG NOTE ===== */
+    .slang-note {
+      font-size: 0.75em;
+      color: #b09090;
+      font-weight: 400;
+      font-style: normal;
     }
 
     /* ===== SEPARATOR ===== */
@@ -144,35 +155,34 @@
       max-width: 680px;
       margin: 1.5rem auto;
       padding: 0 1.4rem;
-      color: #fb923c;
+      color: #c94a5e;
       font-size: 0.88rem;
-      opacity: 0.65;
+      opacity: 0.6;
     }
     .separator::before, .separator::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(251,146,60,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(201,74,94,0.35), transparent);
     }
     .lead-in {
       text-align: center;
       font-size: 1rem;
       font-weight: 800;
-      color: #fb923c;
+      color: #c94a5e;
       padding: 0.5rem 1rem 1.5rem;
       letter-spacing: 0.05em;
-      text-shadow: 0 0 16px rgba(251,146,60,0.3);
     }
 
     /* ===== MAP SECTION ===== */
     .map-section {
-      padding: 2rem 1rem;
-      background: linear-gradient(180deg, rgba(8,3,0,0.6) 0%, rgba(6,2,0,0.9) 100%);
+      padding: 2rem 1.4rem;
+      background: linear-gradient(180deg, rgba(253,240,242,0.5) 0%, rgba(253,244,246,0.9) 100%);
     }
     .section-title {
       font-size: 1.15rem;
       font-weight: 800;
-      color: #fb923c;
+      color: #c94a5e;
       text-align: center;
       margin-bottom: 1rem;
       letter-spacing: 0.08em;
@@ -182,7 +192,7 @@
       display: block;
       width: 36px;
       height: 2px;
-      background: linear-gradient(90deg, #fb923c, #fbbf24);
+      background: linear-gradient(90deg, #c94a5e, #c9a96e);
       border-radius: 2px;
       margin: 0.4rem auto 0;
     }
@@ -190,8 +200,8 @@
       width: 100%;
       height: 340px;
       border-radius: 18px;
-      border: 1px solid rgba(251,146,60,0.25);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(251,146,60,0.08);
+      border: 1px solid rgba(201,74,94,0.2);
+      box-shadow: 0 6px 24px rgba(201,74,94,0.1);
     }
     .map-legend {
       display: flex;
@@ -205,18 +215,19 @@
       align-items: center;
       gap: 0.4rem;
       font-size: 0.76rem;
-      background: rgba(30,10,0,0.8);
-      border: 1px solid rgba(127,29,29,0.5);
+      background: rgba(255,248,250,0.95);
+      border: 1px solid rgba(201,74,94,0.22);
       border-radius: 20px;
       padding: 0.3rem 0.7rem;
       cursor: pointer;
+      color: #5a3a3a;
       transition: background 0.2s, border-color 0.2s;
     }
-    .legend-item:hover { background: rgba(74,26,0,0.9); border-color: rgba(251,146,60,0.5); }
+    .legend-item:hover { background: rgba(253,235,240,1); border-color: rgba(201,74,94,0.5); }
     .badge {
       width: 20px; height: 20px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      background: linear-gradient(135deg, #d4659a, #c94a5e);
       color: #fff;
       font-size: 0.65rem;
       font-weight: 900;
@@ -233,37 +244,35 @@
       margin: 0 auto;
     }
     .card {
-      background:
-        linear-gradient(#1e0900, #261100) padding-box,
-        linear-gradient(145deg, rgba(251,146,60,0.45), rgba(127,29,29,0.2) 50%, rgba(251,191,36,0.15)) border-box;
-      border: 1px solid transparent;
+      background: #ffffff;
+      border: 1px solid rgba(201,74,94,0.16);
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 1.8rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(251,146,60,0.05);
+      box-shadow: 0 4px 20px rgba(201,74,94,0.08), 0 2px 6px rgba(0,0,0,0.04);
       transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
     }
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 24px rgba(251,146,60,0.18), 0 0 0 1px rgba(251,146,60,0.2);
+      box-shadow: 0 12px 36px rgba(201,74,94,0.14), 0 4px 12px rgba(0,0,0,0.06);
     }
     .card-img {
       width: 100%;
       aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
-      background: #1a0a00;
+      background: #fdf0f2;
     }
     .card-img-placeholder {
       width: 100%;
       aspect-ratio: 4/3;
-      background: linear-gradient(135deg, #130600 0%, #2a1000 100%);
+      background: linear-gradient(135deg, #fef2f4 0%, #fde8ec 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      color: #5a3010;
+      color: #c9a0a0;
       font-size: 0.85rem;
     }
     .card-img-placeholder span { font-size: 3rem; }
@@ -278,7 +287,7 @@
     .card-badge {
       width: 32px; height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      background: linear-gradient(135deg, #d4659a, #c94a5e);
       color: #fff;
       font-size: 0.85rem;
       font-weight: 900;
@@ -286,54 +295,50 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 2px 10px rgba(220,38,38,0.55), 0 0 0 2px rgba(239,68,68,0.15);
+      box-shadow: 0 2px 10px rgba(201,74,94,0.35), 0 0 0 2px rgba(201,74,94,0.1);
     }
     .card-name {
       font-size: 1.08rem;
       font-weight: 900;
       letter-spacing: 0.02em;
       flex: 1;
-      background: linear-gradient(135deg, #fef3c7, #fde8cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #3d2828;
     }
     .card-price {
       font-size: 1.05rem;
       font-weight: 900;
-      color: #fbbf24;
+      color: #c94a5e;
       white-space: nowrap;
-      text-shadow: 0 0 12px rgba(251,191,36,0.35);
     }
 
     .card-location {
       display: flex;
       align-items: flex-start;
       gap: 0.4rem;
-      background: rgba(15,5,0,0.6);
-      border: 1px solid rgba(251,191,36,0.18);
+      background: rgba(255,248,250,0.9);
+      border: 1px solid rgba(201,169,110,0.25);
       border-radius: 10px;
       padding: 0.6rem 0.8rem;
       margin-bottom: 0.9rem;
       font-size: 0.8rem;
       line-height: 1.5;
-      color: #fcd34d;
+      color: #9a6050;
     }
     .card-location-icon { flex-shrink: 0; margin-top: 1px; }
 
     .card-desc {
       font-size: 0.88rem;
       line-height: 1.8;
-      color: #fde8cc;
+      color: #5a3a3a;
       white-space: pre-line;
     }
     .card-note {
       margin-top: 0.8rem;
       font-size: 0.8rem;
       line-height: 1.65;
-      color: #a1a1aa;
-      border-left: 2px solid rgba(251,146,60,0.35);
-      background: rgba(251,146,60,0.04);
+      color: #9a8080;
+      border-left: 2px solid rgba(201,74,94,0.28);
+      background: rgba(201,74,94,0.04);
       padding: 0.5rem 0.7rem;
       border-radius: 0 8px 8px 0;
       white-space: pre-line;
@@ -348,26 +353,35 @@
     .outro-text {
       font-size: 0.95rem;
       line-height: 2;
-      color: #fde8cc;
+      color: #5a3a3a;
       white-space: pre-line;
     }
     .outro-tip {
       background:
-        linear-gradient(#1e0900, #261100) padding-box,
-        linear-gradient(145deg, rgba(251,146,60,0.35), rgba(127,29,29,0.2)) border-box;
+        linear-gradient(#fffcfd, #fdf5f7) padding-box,
+        linear-gradient(145deg, rgba(201,74,94,0.28), rgba(201,169,110,0.18)) border-box;
       border: 1px solid transparent;
       border-radius: 16px;
-      padding: 1.1rem 1.3rem;
+      overflow: hidden;
       margin: 1.2rem 0;
+      box-shadow: 0 4px 16px rgba(201,74,94,0.07);
+    }
+    .outro-tip-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .outro-tip-body {
+      padding: 1.1rem 1.3rem;
       font-size: 0.92rem;
       line-height: 1.85;
-      color: #fde8cc;
+      color: #5a3a3a;
       white-space: pre-line;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .outro-tip-title {
       font-weight: 900;
-      color: #fb923c;
+      color: #c94a5e;
       font-size: 0.95rem;
       margin-bottom: 0.4rem;
     }
@@ -376,13 +390,13 @@
       margin: 2.5rem 0 0.5rem;
       font-size: 1rem;
       font-weight: 800;
-      color: #fef3c7;
+      color: #3d2828;
       line-height: 1.7;
     }
     .sign-off .role {
       display: block;
       font-size: 0.76rem;
-      color: #fb923c;
+      color: #c94a5e;
       font-weight: 400;
       letter-spacing: 0.04em;
       margin-bottom: 0.3rem;
@@ -397,25 +411,22 @@
     }
     .article-nav-next, .article-nav-prev {
       display: inline-block;
-      color: #fb923c;
+      color: #c94a5e;
       text-decoration: none;
       font-size: 0.84rem;
       font-weight: 700;
       padding: 0.65rem 1.1rem;
       background:
-        linear-gradient(#201000, #2a1500) padding-box,
-        linear-gradient(135deg, rgba(251,146,60,0.35), rgba(127,29,29,0.2)) border-box;
+        linear-gradient(#fffcfd, #fdf5f7) padding-box,
+        linear-gradient(135deg, rgba(201,74,94,0.28), rgba(201,169,110,0.18)) border-box;
       border: 1px solid transparent;
       border-radius: 20px;
       transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(201,74,94,0.1);
     }
     .article-nav-next:hover, .article-nav-prev:hover {
-      color: #fbbf24;
-      background:
-        linear-gradient(#321800, #3d1e00) padding-box,
-        linear-gradient(135deg, rgba(251,146,60,0.6), rgba(127,29,29,0.4)) border-box;
-      box-shadow: 0 6px 20px rgba(251,146,60,0.2);
+      color: #b83850;
+      box-shadow: 0 6px 20px rgba(201,74,94,0.2);
       transform: translateY(-1px);
     }
 
@@ -424,20 +435,20 @@
       font-size: 0.66rem;
       text-align: right;
       padding: 0.22rem 0.7rem;
-      background: rgba(12,4,0,0.7);
-      color: #6b4c30;
+      background: rgba(253,240,242,0.7);
+      color: #c4a4a4;
     }
-    .img-credit a { color: #78716c; text-decoration: underline; }
-    .img-credit a:hover { color: #a8a29e; }
+    .img-credit a { color: #b09090; text-decoration: underline; }
+    .img-credit a:hover { color: #8c6a6a; }
 
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 1.8rem 1rem;
       font-size: 0.76rem;
-      color: #5c3010;
-      border-top: 1px solid rgba(251,146,60,0.1);
-      background: rgba(10,3,0,0.6);
+      color: #c4a4a4;
+      border-top: 1px solid rgba(201,74,94,0.1);
+      background: rgba(253,244,246,0.5);
     }
     .footer-credits {
       max-width: 680px;
@@ -445,23 +456,23 @@
       text-align: left;
       font-size: 0.7rem;
       line-height: 1.9;
-      color: #6b4c30;
+      color: #c4a4a4;
     }
-    .footer-credits a { color: #78716c; text-decoration: underline; }
-    .footer-credits a:hover { color: #a8a29e; }
+    .footer-credits a { color: #b09090; text-decoration: underline; }
+    .footer-credits a:hover { color: #8c6a6a; }
 
     /* ===== LEAFLET POPUP CUSTOM ===== */
     .leaflet-popup-content-wrapper {
-      background: #1e0900;
-      color: #fde8cc;
-      border: 1px solid rgba(220,38,38,0.6);
+      background: #fffbfc;
+      color: #3d2828;
+      border: 1px solid rgba(201,74,94,0.35);
       border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 24px rgba(201,74,94,0.12);
     }
-    .leaflet-popup-tip { background: #1e0900; }
+    .leaflet-popup-tip { background: #fffbfc; }
     .leaflet-popup-content { font-size: 0.84rem; line-height: 1.5; }
-    .popup-name { font-weight: 900; font-size: 0.95rem; color: #fb923c; }
-    .popup-price { color: #fcd34d; font-weight: 700; }
+    .popup-name { font-weight: 900; font-size: 0.95rem; color: #c94a5e; }
+    .popup-price { color: #b83850; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -485,7 +496,7 @@
 <section class="intro-section">
   <p class="intro-text">ユニバは最近色んなお肉のフードカートがありまして🤤
 レストランは別でフードカートに絞ってご紹介します！☺️
-改めてまとめてみるとやっぱりジュラパエリアはお肉激戦区でした！</p>
+改めてまとめてみるとやっぱりジュラパ<span class="slang-note">（ジュラシック・パークエリア）</span>はお肉激戦区でした！</p>
 </section>
 
 <div class="separator">🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗＊🍖＊🍗</div>
@@ -540,7 +551,7 @@
 子供の頃は肉の塊ってだけでテンション上がっておりましたが、大人になって食べると改めて美味しい！😋✨
 意外にアブラっこくなくてスモーキー！</div>
       <div class="card-note">※もしかしたらフライングダイナソー寄りのフォッシュフェールズでもお肉があるかも👀
-前までファミチキのでかいの売ってましたがしれっと消えたと情報入っております‥（リア友情報）</div>
+前までファミチキのでかいの売ってましたがしれっと消えたと情報入っております‥（リア友<span class="slang-note">＝リアルの友達</span>情報）</div>
     </div>
   </article>
 
@@ -556,7 +567,7 @@
       </div>
       <div class="card-location">
         <span class="card-location-icon">📍</span>
-        <span>サバイバルスナック（ジュラシックパークエリア奥・マリオ側）</span>
+        <span>サバイバルスナック（ジュラシックパークエリア奥・マリオ<span class="slang-note">＝スーパー・ニンテンドー・ワールド</span>側）</span>
       </div>
       <div class="card-desc">ジュラパエリアの奥（マリオ側）にあるサバイバルスナックで販売中のお肉です！
 お肉自体は①のチャイニーズポークリブと同じなのですが、味がぜんっぜん違います！！
@@ -616,17 +627,25 @@
 <section class="outro-section">
 
   <div class="outro-tip">
-    <div class="outro-tip-title">🥧 番外編：ビーフミートパイ</div>比較的肉多めのハリーポッター前のビーフミートパイも個人的には捨てがたい🥺
+    <img class="outro-tip-img" src="images/hogwarts-meat-pie.jpg" alt="ビーフミートパイ">
+    <div class="img-credit">Photo: <a href="https://castel.jp/p/71619" target="_blank" rel="noopener">castel.jp</a></div>
+    <div class="outro-tip-body">
+      <div class="outro-tip-title">🥧 番外編：ビーフミートパイ</div>比較的肉多めのハリーポッター前のビーフミートパイも個人的には捨てがたい🥺
 お肉ってよりはパイですが美味しいので食べてみてください☺️
 ⚠️熱いので食べるとき注意😅</div>
+  </div>
 
   <p class="outro-text">夏になると徐々にフードも冷凍フルーツが多めに切り替わってくるので（目移り多くなっちゃう😅）
 今のうちにみんなで肉フェスやりましょう!!💪🔥</p>
 
   <div class="outro-tip">
-    <div class="outro-tip-title">🍺 お酒もあるよ！</div>ちなみに👀
+    <img class="outro-tip-img" src="images/usj-beer.jpg" alt="USJのビール">
+    <div class="img-credit">Photo: <a href="https://skynet-c.jp/blog/article01/2024/09/" target="_blank" rel="noopener">skynet-c.jp</a></div>
+    <div class="outro-tip-body">
+      <div class="outro-tip-title">🍺 お酒もあるよ！</div>ちなみに👀
 フードカートでもお酒は販売されております！
 カートごとに缶ビールか生ビールかの記載もちゃんとありますので是非お肉と一緒に楽しんでみてください☺️</div>
+  </div>
 
   <div class="sign-off">
     以上<br>
@@ -643,7 +662,9 @@
 <footer>
   <div class="footer-credits">
     【画像出典】<br>
-    ・全フード画像：<a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a>
+    ・全フード画像（①〜⑤）：<a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a><br>
+    ・ビーフミートパイ：<a href="https://castel.jp/p/71619" target="_blank" rel="noopener">castel.jp</a><br>
+    ・ビール：<a href="https://skynet-c.jp/blog/article01/2024/09/" target="_blank" rel="noopener">skynet-c.jp</a>
   </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
@@ -696,7 +717,7 @@
   ];
 
   // Create map
-  const map = L.map('map', { zoomControl: true }).setView(USJ_CENTER, 17);
+  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView(USJ_CENTER, 17);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -708,11 +729,11 @@
     return L.divIcon({
       html: `<div style="
         width:32px;height:32px;border-radius:50%;
-        background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;
+        background:linear-gradient(135deg,#d4659a,#c94a5e);color:#fff;
         font-size:13px;font-weight:900;
         display:flex;align-items:center;justify-content:center;
         border:3px solid #fff;
-        box-shadow:0 2px 10px rgba(0,0,0,0.5);
+        box-shadow:0 2px 10px rgba(0,0,0,0.3);
         font-family:-apple-system,sans-serif;
       ">${num}</div>`,
       className: '',
@@ -729,7 +750,7 @@
       .addTo(map)
       .bindPopup(`
         <div class="popup-name">${s.emoji} ${s.name}</div>
-        <div style="margin:4px 0 2px;opacity:0.8;">${s.snack}</div>
+        <div style="margin:4px 0 2px;opacity:0.7;">${s.snack}</div>
         <div class="popup-price">${s.price}</div>
       `);
     markers.push(marker);
