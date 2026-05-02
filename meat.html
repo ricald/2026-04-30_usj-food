@@ -377,6 +377,19 @@
     }
     .article-nav-next:hover, .article-nav-prev:hover { background: #4a1a00; }
 
+    /* ===== IMAGE CREDIT ===== */
+    .img-credit {
+      font-size: 0.68rem;
+      text-align: right;
+      padding: 0.25rem 0.6rem;
+      background: #1a0800;
+      color: #6b4c30;
+    }
+    .img-credit a {
+      color: #9ca3af;
+      text-decoration: underline;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -385,6 +398,15 @@
       color: #6b3a1f;
       border-top: 1px solid #2d1200;
     }
+    .footer-credits {
+      max-width: 680px;
+      margin: 0 auto 0.8rem;
+      text-align: left;
+      font-size: 0.72rem;
+      line-height: 1.8;
+      color: #6b4c30;
+    }
+    .footer-credits a { color: #9ca3af; text-decoration: underline; }
 
     /* ===== LEAFLET POPUP CUSTOM ===== */
     .leaflet-popup-content-wrapper {
@@ -439,6 +461,7 @@
   <!-- ① チャイニーズポークリブ -->
   <article class="card" id="card-1">
     <img class="card-img" src="images/chinese-pork-rib.png" alt="チャイニーズポークリブ">
+    <div class="img-credit">© <a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">①</div>
@@ -458,6 +481,7 @@
   <!-- ② ターキーレッグ -->
   <article class="card" id="card-2">
     <img class="card-img" src="images/turkey-leg.png" alt="ターキーレッグ">
+    <div class="img-credit">© <a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">②</div>
@@ -480,6 +504,7 @@
   <!-- ③ ブラックペッパーポークリブ -->
   <article class="card" id="card-3">
     <img class="card-img" src="images/black-pepper-rib.png" alt="ブラックペッパーポークリブ">
+    <div class="img-credit">© <a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">③</div>
@@ -500,6 +525,7 @@
   <!-- ④ サメのエジキ -->
   <article class="card" id="card-4">
     <img class="card-img" src="images/shark-sausage.png" alt="サメのエジキ">
+    <div class="img-credit">© <a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">④</div>
@@ -520,6 +546,7 @@
   <!-- ⑤ スモークチキン -->
   <article class="card" id="card-5">
     <img class="card-img" src="images/smoke-chicken.png" alt="スモークチキン">
+    <div class="img-credit">© <a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">⑤</div>
@@ -571,6 +598,10 @@
 </div>
 
 <footer>
+  <div class="footer-credits">
+    【画像出典】<br>
+    ・全フード画像：<a href="https://www.usj.co.jp/" target="_blank" rel="noopener">Universal Studios Japan</a>
+  </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
 
