@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>チュリトス＆25周年コラボフード | チョコのUSJフードガイド</title>
+  <title>25周年レストラン編 | チョコのUSJフードガイド</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
@@ -38,7 +38,7 @@
       overflow: hidden;
     }
     header::before {
-      content: "🍫";
+      content: "🍽️";
       font-size: 8rem;
       position: absolute;
       top: -1rem;
@@ -47,7 +47,7 @@
       pointer-events: none;
     }
     header::after {
-      content: "🧡";
+      content: "🥂";
       font-size: 8rem;
       position: absolute;
       bottom: -2rem;
@@ -109,30 +109,6 @@
       opacity: 0.7;
       overflow: hidden;
       white-space: nowrap;
-    }
-    .lead-in {
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 800;
-      color: #fb923c;
-      padding: 0.5rem 1rem 1.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    /* ===== SECTION HEADER ===== */
-    .section-header {
-      max-width: 680px;
-      margin: 0.5rem auto 0;
-      padding: 0 1rem;
-    }
-    .section-header-inner {
-      background: linear-gradient(135deg, #7f1d1d, #b45309);
-      border-radius: 14px;
-      padding: 0.7rem 1.2rem;
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* ===== MAP SECTION ===== */
@@ -214,31 +190,6 @@
       display: block;
       background: #1a0a00;
     }
-    .card-img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: #6b3a1f;
-      font-size: 0.85rem;
-    }
-    .card-img-placeholder span { font-size: 3rem; }
-
-    /* Collab tag */
-    .collab-tag {
-      display: inline-block;
-      background: #7f1d1d;
-      color: #fcd34d;
-      font-size: 0.72rem;
-      font-weight: 900;
-      padding: 0.2rem 0.7rem;
-      border-radius: 0 0 10px 0;
-      letter-spacing: 0.05em;
-    }
 
     .card-body { padding: 1.2rem 1.4rem 1.4rem; }
     .card-header {
@@ -293,33 +244,6 @@
       white-space: pre-line;
     }
 
-    /* Dual-item card (2 items, 1 image) */
-    .dual-item { padding: 0.5rem 0; }
-    .dual-item + .dual-item {
-      border-top: 1px solid #4a1a00;
-      margin-top: 0.5rem;
-      padding-top: 1rem;
-    }
-    .dual-item .card-header { margin-bottom: 0.5rem; }
-
-    /* Location info box */
-    .location-box {
-      max-width: 680px;
-      margin: -0.8rem auto 1.8rem;
-      padding: 0 1rem;
-    }
-    .location-box-inner {
-      background: #1a0800;
-      border: 1px solid #b45309;
-      border-radius: 14px;
-      padding: 1rem 1.2rem;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: #fcd34d;
-      white-space: pre-line;
-    }
-    .location-box-inner strong { font-size: 0.95rem; display: block; margin-bottom: 0.3rem; }
-
     /* ===== OUTRO ===== */
     .outro-section {
       max-width: 680px;
@@ -370,7 +294,6 @@
     }
     .article-nav-next:hover, .article-nav-prev:hover { background: #4a1a00; }
 
-    /* ===== FOOTER ===== */
     /* ===== IMAGE CREDIT ===== */
     .img-credit {
       font-size: 0.68rem;
@@ -424,174 +347,114 @@
   <div class="header-inner">
     <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
     <div class="header-text">
-      <p class="greeting">みなさまおはようございます＆お疲れ様です！🙋‍♀️</p>
-      <h1>チュリトス＆<br>25周年コラボフード</h1>
-      <p class="header-sub">今なんと!?😳 コラボチュリトスが大集合🧡</p>
+      <p class="greeting">みなさまこんばんは＆お疲れ様です！！🙋‍♀️</p>
+      <h1>25周年<br>レストラン編</h1>
+      <p class="header-sub">レストランもコンプしたくなるフード満載！😆</p>
     </div>
   </div>
 </header>
 
 <!-- ===== INTRO ===== -->
 <section class="intro-section">
-  <p class="intro-text">今回はインパしたら欠かせないおやつ「チュリトス」と「25周年企業コラボフード」の紹介です🥰
-今なんと!?😳
-いろんなコラボのチュリトスが売られてましてチュリトス全制覇だけで金欠の勢いです🧡
-ユニバ25周年のユニークなフード情報もありますのでぜひ食べてみてください！！✨</p>
+  <p class="intro-text">今回はユニバ25周年のコラボフード、レストランバージョンです！✨
+
+レストランもコンプしたくなるフード満載です！😆</p>
 </section>
 
 <div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊</div>
 
 <!-- MAP -->
 <section class="map-section">
-  <p class="section-title">📍 販売場所マップ</p>
+  <p class="section-title">📍 レストランマップ</p>
   <div id="map"></div>
   <div class="map-legend" id="legend"></div>
 </section>
 
-<!-- ===== 25周年コラボフード ===== -->
-<div class="section-header">
-  <div class="section-header-inner">🧡 25周年コラボフード</div>
-</div>
+<!-- ===== FOOD CARDS ===== -->
 <section class="cards-section">
 
-  <!-- ① アルトバイエルンドッグ -->
+  <!-- ① メルズ・ドライブイン プルドポークバーガー -->
   <article class="card" id="card-1">
-    <div class="collab-tag">〈伊藤ハムコラボ〉</div>
-    <img class="card-img" src="images/altbayern-dog.jpg" alt="アルトバイエルンドッグ">
-    <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/03/25th-food/" target="_blank" rel="noopener">USJ365</a></div>
+    <img class="card-img" src="images/pulled-pork-burger.jpg" alt="プルドポークバーガー">
+    <div class="img-credit">Photo: <a href="https://castel.jp/p/71619" target="_blank" rel="noopener">castel.jp</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">①</div>
-        <div class="card-name">アルトバイエルンドッグ</div>
-        <div class="card-price">¥3,500</div>
+        <div class="card-name">プルドポークバーガー</div>
+        <div class="card-price">¥2,300</div>
       </div>
       <div class="card-location">
         <span class="card-location-icon">📍</span>
-        <span>ディスカバーユーマーケット（ニューヨークエリア付近）</span>
+        <span>メルズ・ドライブイン（ハリウッドエリア）</span>
       </div>
-      <div class="card-desc">どでかいアルトバイエルンが乗っているホットドック！
-長さはなんと35cm!!😳
-1個でお腹いっぱいになるホットドッグです！</div>
+      <div class="card-desc">まだ食べれてませんので味は不明ですが見た感じヴォリュームもあってめちゃ美味しそうでした😋
+（安定のリア友から写メもらったんですがチーズバーガーみたいな感じでした😌）
+メルズやからほぼハズレなしやとは思います！
+時間帯によって並んだりしてます😅</div>
     </div>
   </article>
 
-  <!-- ② マヨマヨツナマヨコーンマン -->
+  <!-- ② パークサイドグリル ティラミス -->
   <article class="card" id="card-2">
-    <div class="collab-tag">〈キューピーコラボ〉</div>
-    <img class="card-img" src="images/mayo-corn-man.jpg" alt="マヨマヨツナマヨコーンマン">
+    <img class="card-img" src="images/tiramisu.jpg" alt="ティラミス×ウイスキー">
     <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/03/25th-food/" target="_blank" rel="noopener">USJ365</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">②</div>
-        <div class="card-name">マヨマヨツナマヨコーンマン</div>
-        <div class="card-price">¥850</div>
+        <div class="card-name">ティラミス</div>
+        <div class="card-price">¥1,000（🥃 ¥800）</div>
       </div>
       <div class="card-location">
         <span class="card-location-icon">📍</span>
-        <span>ディスカバーユーマーケット（ニューヨークエリア付近）</span>
+        <span>パークサイドグリル（ジュラシック・パークエリア付近）</span>
       </div>
-      <div class="card-desc">見た目はキューピーマヨネーズ！
-マンにしては大きめでしっとりしていて美味しいです😋
-コーンが甘くて美味しいです🧡</div>
+      <div class="card-desc">25周年のカクテルも出てました🧡
+カクテルは飲んでないのですが、ティラミスは食べましたよー！✨😆
+ティラミスは1000円で買えるのですが、別でウイスキー🥃の原液？薄めてないやつをつけることができます！
+かけた食べたら味もウイスキーやけど香りがフワってきてすんごい美味しかったです🥰
+ウイスキーを原液はかけなければティラミス自体はアルコール感は感じませんでした😃</div>
+      <div class="card-note">⚠️買う時に年確あります、メニュー的にも比較的大人が多いです</div>
     </div>
   </article>
 
-  <!-- ③④ 31コラボ (2 items, 1 image) -->
-  <article class="card" id="card-34">
-    <div class="collab-tag">〈31コラボ〉</div>
-    <img class="card-img" src="images/baskin-robbins-churros.jpg" alt="31コラボ チュリトス" style="object-position: center center;">
-    <div class="img-credit">Photo: <a href="https://www.fashion-press.net/news/143560" target="_blank" rel="noopener">ファッションプレス</a></div>
-    <div class="card-body">
-      <!-- ③ ホッピングシャワー -->
-      <div class="dual-item">
-        <div class="card-header">
-          <div class="card-badge">③</div>
-          <div class="card-name">ホッピングシャワー</div>
-          <div class="card-price">¥800</div>
-        </div>
-        <div class="card-desc">シナモンチュリトスにソースとホッピングシャワーのパチパチキャンディーがのったチュリトス！</div>
-      </div>
-      <!-- ④ ラブポーション31 -->
-      <div class="dual-item">
-        <div class="card-header">
-          <div class="card-badge">④</div>
-          <div class="card-name">ラブポーション31</div>
-          <div class="card-price">¥800</div>
-        </div>
-        <div class="card-desc">シナモンチュリトスにソースとハートのチョコがのったチュリトス！</div>
-        <div class="card-note">※２つともかなり甘め、味重視ってよりは映え重視かなっていう印象でした😃</div>
-      </div>
-    </div>
-  </article>
-
-</section>
-
-<!-- 販売場所ボックス -->
-<div class="location-box">
-  <div class="location-box-inner">
-    <strong>✅ 25周年・企業コラボフードの販売場所</strong>ニューヨークエリア付近のディスカバーユーマーケット（ユニバーサルマーケット）で販売中です！
-  </div>
-</div>
-
-<!-- ===== その他チュリトス ===== -->
-<div class="section-header">
-  <div class="section-header-inner">🍫 その他チュリトス</div>
-</div>
-<section class="cards-section">
-
-  <!-- ⑤ キャラメルポップコーン!?チュリトス -->
-  <article class="card" id="card-5">
-    <img class="card-img" src="images/caramel-popcorn-churros.jpg" alt="キャラメルポップコーン!?チュリトス">
+  <!-- ③ ルイズニューヨークピザパーラー ルイズピザセット -->
+  <article class="card" id="card-3">
+    <img class="card-img" src="images/louis-pizza.jpg" alt="ルイズピザセット">
     <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/03/25th-food/" target="_blank" rel="noopener">USJ365</a></div>
     <div class="card-body">
       <div class="card-header">
-        <div class="card-badge">⑤</div>
-        <div class="card-name">キャラメルポップコーン!?チュリトス</div>
-        <div class="card-price">¥800</div>
+        <div class="card-badge">③</div>
+        <div class="card-name">ルイズピザセット</div>
+        <div class="card-price">¥2,300</div>
       </div>
       <div class="card-location">
         <span class="card-location-icon">📍</span>
-        <span>スペースファンタジー前・ウォーターワールド前・ワンダーランド前</span>
+        <span>ルイズニューヨークピザパーラー（ニューヨークエリア）</span>
       </div>
-      <div class="card-desc">シナモンチュリトスにキャラメルポップコーンがのってるチュリトスです！
-いい組み合わせ🥰
-キャラメルがしっかりかかっていてなんならちょっとキャラメルが香ばしい🥺</div>
+      <div class="card-desc">ミートボールピザとポテトが入ったBOXです！
+ピザの１切れが大きめなんですが、トマトベースで食べやすくて意外とペロリです😋
+いっつもそんな混んでないので席も取りやすいかなと思います☺️</div>
     </div>
   </article>
 
-  <!-- ⑥ ウィキッド・チュリトス -->
-  <article class="card" id="card-6">
-    <div class="card-img-placeholder"><span>🌿</span>チョコ未食につき画像なし😅</div>
-    <div class="card-body">
-      <div class="card-header">
-        <div class="card-badge">⑥</div>
-        <div class="card-name">ウィキッド・チュリトス<br><small style="font-weight:400;font-size:0.8rem;">〜ピーナッツバターフレーバー〜</small></div>
-        <div class="card-price">¥850</div>
-      </div>
-      <div class="card-desc">上にミドリ、下にピンクのソースがかかっているチュリトス！
-実はチョコまだ食べてなくて味は不明です😅
-ただ、そんなびっくり要素はないと思うのでこれも味重視ってよりは映え重視かなって思っております👀</div>
-    </div>
-  </article>
-
-  <!-- ⑦ ターキーレッグ!?まん -->
-  <article class="card" id="card-7">
-    <img class="card-img" src="images/turkey-man.jpg" alt="ターキーレッグ!?まん">
+  <!-- ④ スヌーピー・バックロットカフェ スパゲティーセット -->
+  <article class="card" id="card-4">
+    <img class="card-img" src="images/snoopy-spaghetti.jpg" alt="スパゲティーセット">
     <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/03/25th-food/" target="_blank" rel="noopener">USJ365</a></div>
     <div class="card-body">
       <div class="card-header">
-        <div class="card-badge">⑦</div>
-        <div class="card-name">ターキーレッグ!?まん</div>
-        <div class="card-price">¥850</div>
+        <div class="card-badge">④</div>
+        <div class="card-name">スパゲティーセット</div>
+        <div class="card-price">¥1,800〜</div>
       </div>
       <div class="card-location">
         <span class="card-location-icon">📍</span>
-        <span>スペースファンタジー前・ハリウッド前のカートで販売中</span>
+        <span>スヌーピー・バックロットカフェ（ハリウッドエリア）</span>
       </div>
-      <div class="card-desc">名前の通り見た目がターキーレッグのマンです！😆
-これが意外と美味しい！！（失礼😤）
-中にターキーレッグを細かく裂いた具が入っていて、持ち手のところにはウインナーが入ってます☺️</div>
-      <div class="card-note">※もしかしたらドラゴンズパール前でチョコレートチュリトスが販売中かも👀</div>
+      <div class="card-desc">お子様エリアやからって侮れんのがここです!!🫶
+トマトソースがベースのスパゲティーで、大人でも満足できる量で安定の美味しさです!!
+金額が変わって、スパゲティーセットにランチボックスがついて2300円で購入できます！
+いつもお子ちゃま連れで賑わっております💁‍♀️</div>
     </div>
   </article>
 
@@ -601,10 +464,8 @@
 
 <!-- ===== OUTRO ===== -->
 <section class="outro-section">
-  <p class="outro-text">ということで、第２弾いかがでしたでしょうか？👀
-今回もフードカートを中心にご紹介しました！
-お肉以外にもみてるだけでお腹空きそうなフード満載ですね！✨🤤
-次回は25周年のレストランのご紹介ですお楽しみに〜！👋</p>
+  <p class="outro-text">以上レストラン編でした！
+気になった方ぜひ食べてみてください✨</p>
 
   <div class="sign-off">
     以上<br>
@@ -614,17 +475,17 @@
 </section>
 
 <div class="article-nav">
-  <a href="meat.html" class="article-nav-prev">← お肉フードガイド</a>
-  <a href="restaurant.html" class="article-nav-next">レストラン編 →</a>
+  <a href="churros.html" class="article-nav-prev">← チュリトス＆25周年コラボフード</a>
+  <a href="index.html" class="article-nav-next">トップへ →</a>
 </div>
 
 <footer>
   <div class="footer-credits">
     【画像出典】<br>
-    ・アルトバイエルンドッグ / マヨマヨツナマヨコーンマン / キャラメルポップコーン!?チュリトス / ターキーレッグ!?まん：
+    ・ティラミス / ルイズピザセット / スパゲティーセット：
     <a href="https://usj365.com/2026/03/03/25th-food/" target="_blank" rel="noopener">USJ365</a><br>
-    ・ホッピングシャワー / ラブポーション31（31コラボ）：
-    <a href="https://www.fashion-press.net/news/143560" target="_blank" rel="noopener">ファッションプレス</a>
+    ・プルドポークバーガー：
+    <a href="https://castel.jp/p/71619" target="_blank" rel="noopener">castel.jp</a>
   </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
@@ -634,39 +495,32 @@
 
   const spots = [
     {
-      id: "A",
-      name: "ディスカバーユーマーケット",
-      items: "①アルトバイエルンドッグ ②マヨマヨツナマヨコーンマン ③④31コラボチュリトス",
-      latlng: [34.6668, 135.4342],
-      emoji: "🧡"
+      id: "①",
+      name: "メルズ・ドライブイン",
+      items: "①プルドポークバーガー",
+      latlng: [34.6690, 135.4328],
+      color: "#dc2626"
     },
     {
-      id: "B",
-      name: "スペースファンタジー前カート",
-      items: "⑤キャラメルポップコーン!?チュリトス ⑦ターキーレッグ!?まん",
-      latlng: [34.6673, 135.4308],
-      emoji: "🍫"
+      id: "②",
+      name: "パークサイドグリル",
+      items: "②ティラミス（＋ウイスキー）",
+      latlng: [34.6645, 135.4298],
+      color: "#dc2626"
     },
     {
-      id: "C",
-      name: "ウォーターワールド前カート",
-      items: "⑤キャラメルポップコーン!?チュリトス",
-      latlng: [34.6648, 135.4298],
-      emoji: "🍫"
+      id: "③",
+      name: "ルイズニューヨークピザパーラー",
+      items: "③ルイズピザセット",
+      latlng: [34.6665, 135.4348],
+      color: "#dc2626"
     },
     {
-      id: "D",
-      name: "ワンダーランド前カート",
-      items: "⑤キャラメルポップコーン!?チュリトス",
-      latlng: [34.6679, 135.4318],
-      emoji: "🍫"
-    },
-    {
-      id: "E",
-      name: "ハリウッド前カート",
-      items: "⑦ターキーレッグ!?まん",
-      latlng: [34.6670, 135.4330],
-      emoji: "🍫"
+      id: "④",
+      name: "スヌーピー・バックロットカフェ",
+      items: "④スパゲティーセット",
+      latlng: [34.6680, 135.4318],
+      color: "#dc2626"
     }
   ];
 
@@ -695,20 +549,18 @@
     });
   }
 
-  const colors = { A: '#b45309', B: '#dc2626', C: '#dc2626', D: '#dc2626', E: '#dc2626' };
-
   spots.forEach(s => {
-    const marker = L.marker(s.latlng, { icon: makeIcon(s.id, colors[s.id] || '#dc2626') })
+    const marker = L.marker(s.latlng, { icon: makeIcon(s.id, s.color) })
       .addTo(map)
       .bindPopup(`
-        <div class="popup-name">${s.emoji} ${s.name}</div>
+        <div class="popup-name">🍽️ ${s.name}</div>
         <div style="margin:4px 0 2px;opacity:0.8;font-size:0.78rem;">${s.items}</div>
       `);
 
     const legend = document.getElementById('legend');
     const item = document.createElement('div');
     item.className = 'legend-item';
-    item.innerHTML = `<span class="badge" style="background:${colors[s.id]}">${s.id}</span>${s.name}`;
+    item.innerHTML = `<span class="badge" style="background:${s.color}">${s.id}</span>${s.name}`;
     item.addEventListener('click', () => {
       map.setView(s.latlng, 18);
       marker.openPopup();
