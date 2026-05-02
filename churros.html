@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チュリトス＆25周年コラボフード | チョコのUSJフードガイド</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: #1a0a00;
+      color: #fff3e0;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP NAV ===== */
+    .top-nav {
+      background: #0f0500;
+      padding: 0.6rem 1.2rem;
+      border-bottom: 1px solid #2d1200;
+    }
+    .top-nav a {
+      color: #fb923c;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .top-nav a:hover { text-decoration: underline; }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #78350f 0%, #92400e 40%, #b45309 100%);
+      padding: 2rem 1.4rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "🍫";
+      font-size: 8rem;
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    header::after {
+      content: "🧡";
+      font-size: 8rem;
+      position: absolute;
+      bottom: -2rem;
+      right: -1rem;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,0.3);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .header-text { flex: 1; }
+    .greeting { font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.3rem; }
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      line-height: 1.25;
+      margin-bottom: 0.4rem;
+    }
+    .header-sub { font-size: 0.85rem; line-height: 1.6; opacity: 0.9; }
+    .post-date { margin-top: 0.5rem; font-size: 0.75rem; opacity: 0.6; letter-spacing: 0.04em; }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      text-align: center;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      padding: 1.4rem 1rem;
+      color: #fb923c;
+      opacity: 0.7;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .lead-in {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fb923c;
+      padding: 0.5rem 1rem 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .section-header-inner {
+      background: linear-gradient(135deg, #7f1d1d, #b45309);
+      border-radius: 14px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* ===== MAP SECTION ===== */
+    .map-section {
+      padding: 2rem 1rem;
+      background: #0f0500;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fb923c;
+      text-align: center;
+      margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
+    #map {
+      width: 100%;
+      height: 340px;
+      border-radius: 16px;
+      border: 2px solid #7f1d1d;
+      box-shadow: 0 4px 24px rgba(251,146,60,0.2);
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      background: #2d1200;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .legend-item:hover { background: #4a1a00; }
+    .badge {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOD CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #2d1200;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(251,146,60,0.2);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #1a0a00;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #6b3a1f;
+      font-size: 0.85rem;
+    }
+    .card-img-placeholder span { font-size: 3rem; }
+
+    /* Collab tag */
+    .collab-tag {
+      display: inline-block;
+      background: #7f1d1d;
+      color: #fcd34d;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 0.2rem 0.7rem;
+      border-radius: 0 0 10px 0;
+      letter-spacing: 0.05em;
+    }
+
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+    .card-badge {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(220,38,38,0.5);
+    }
+    .card-name { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.03em; flex: 1; }
+    .card-price { font-size: 1.1rem; font-weight: 900; color: #fb923c; white-space: nowrap; }
+
+    .card-location {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      background: #1a0800;
+      border-radius: 10px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #fcd34d;
+    }
+    .card-location-icon { flex-shrink: 0; margin-top: 1px; }
+
+    .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #9ca3af;
+      border-left: 2px solid #4b2020;
+      padding-left: 0.7rem;
+      white-space: pre-line;
+    }
+
+    /* Dual-item card (2 items, 1 image) */
+    .dual-item { padding: 0.5rem 0; }
+    .dual-item + .dual-item {
+      border-top: 1px solid #4a1a00;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+    }
+    .dual-item .card-header { margin-bottom: 0.5rem; }
+
+    /* Location info box */
+    .location-box {
+      max-width: 680px;
+      margin: -0.8rem auto 1.8rem;
+      padding: 0 1rem;
+    }
+    .location-box-inner {
+      background: #1a0800;
+      border: 1px solid #b45309;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #fcd34d;
+      white-space: pre-line;
+    }
+    .location-box-inner strong { font-size: 0.95rem; display: block; margin-bottom: 0.3rem; }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #fde8cc;
+      white-space: pre-line;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff3e0;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.78rem;
+      color: #fb923c;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== ARTICLE NAV ===== */
+    .article-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 2rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .article-nav-next, .article-nav-prev {
+      display: inline-block;
+      color: #fb923c;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.6rem 1rem;
+      border: 1px solid #7f1d1d;
+      border-radius: 20px;
+      background: #2d1200;
+      transition: background 0.2s;
+    }
+    .article-nav-next:hover, .article-nav-prev:hover { background: #4a1a00; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.78rem;
+      color: #6b3a1f;
+      border-top: 1px solid #2d1200;
+    }
+
+    /* ===== LEAFLET POPUP CUSTOM ===== */
+    .leaflet-popup-content-wrapper {
+      background: #2d1200;
+      color: #fff3e0;
+      border: 1px solid #dc2626;
+      border-radius: 12px;
+    }
+    .leaflet-popup-tip { background: #2d1200; }
+    .leaflet-popup-content { font-size: 0.85rem; line-height: 1.5; }
+    .popup-name { font-weight: 900; font-size: 1rem; color: #fb923c; }
+    .popup-price { color: #fcd34d; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav"><a href="index.html">← トップへ戻る</a></nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">みなさまおはようございます＆お疲れ様です！🙋‍♀️</p>
+      <h1>チュリトス＆<br>25周年コラボフード</h1>
+      <p class="header-sub">今なんと!?😳 コラボチュリトスが大集合🧡</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">今回はインパしたら欠かせないおやつ「チュリトス」と「25周年企業コラボフード」の紹介です🥰
+今なんと!?😳
+いろんなコラボのチュリトスが売られてましてチュリトス全制覇だけで金欠の勢いです🧡
+ユニバ25周年のユニークなフード情報もありますのでぜひ食べてみてください！！✨</p>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊</div>
+
+<!-- MAP -->
+<section class="map-section">
+  <p class="section-title">📍 販売場所マップ</p>
+  <div id="map"></div>
+  <div class="map-legend" id="legend"></div>
+</section>
+
+<!-- ===== 25周年コラボフード ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🧡 25周年コラボフード</div>
+</div>
+<section class="cards-section">
+
+  <!-- ① アルトバイエルンドッグ -->
+  <article class="card" id="card-1">
+    <div class="collab-tag">〈伊藤ハムコラボ〉</div>
+    <img class="card-img" src="images/altbayern-dog.jpg" alt="アルトバイエルンドッグ">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">①</div>
+        <div class="card-name">アルトバイエルンドッグ</div>
+        <div class="card-price">¥3,500</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>ディスカバーユーマーケット（ニューヨークエリア付近）</span>
+      </div>
+      <div class="card-desc">どでかいアルトバイエルンが乗っているホットドック！
+長さはなんと35cm!!😳
+1個でお腹いっぱいになるホットドッグです！</div>
+    </div>
+  </article>
+
+  <!-- ② マヨマヨツナマヨコーンマン -->
+  <article class="card" id="card-2">
+    <div class="collab-tag">〈キューピーコラボ〉</div>
+    <img class="card-img" src="images/mayo-corn-man.jpg" alt="マヨマヨツナマヨコーンマン">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">②</div>
+        <div class="card-name">マヨマヨツナマヨコーンマン</div>
+        <div class="card-price">¥850</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>ディスカバーユーマーケット（ニューヨークエリア付近）</span>
+      </div>
+      <div class="card-desc">見た目はキューピーマヨネーズ！
+マンにしては大きめでしっとりしていて美味しいです😋
+コーンが甘くて美味しいです🧡</div>
+    </div>
+  </article>
+
+  <!-- ③④ 31コラボ (2 items, 1 image) -->
+  <article class="card" id="card-34">
+    <div class="collab-tag">〈31コラボ〉</div>
+    <img class="card-img" src="images/baskin-robbins-churros.jpg" alt="31コラボ チュリトス" style="object-position: center center;">
+    <div class="card-body">
+      <!-- ③ ホッピングシャワー -->
+      <div class="dual-item">
+        <div class="card-header">
+          <div class="card-badge">③</div>
+          <div class="card-name">ホッピングシャワー</div>
+          <div class="card-price">¥800</div>
+        </div>
+        <div class="card-desc">シナモンチュリトスにソースとホッピングシャワーのパチパチキャンディーがのったチュリトス！</div>
+      </div>
+      <!-- ④ ラブポーション31 -->
+      <div class="dual-item">
+        <div class="card-header">
+          <div class="card-badge">④</div>
+          <div class="card-name">ラブポーション31</div>
+          <div class="card-price">¥800</div>
+        </div>
+        <div class="card-desc">シナモンチュリトスにソースとハートのチョコがのったチュリトス！</div>
+        <div class="card-note">※２つともかなり甘め、味重視ってよりは映え重視かなっていう印象でした😃</div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- 販売場所ボックス -->
+<div class="location-box">
+  <div class="location-box-inner">
+    <strong>✅ 25周年・企業コラボフードの販売場所</strong>ニューヨークエリア付近のディスカバーユーマーケット（ユニバーサルマーケット）で販売中です！
+  </div>
+</div>
+
+<!-- ===== その他チュリトス ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🍫 その他チュリトス</div>
+</div>
+<section class="cards-section">
+
+  <!-- ⑤ キャラメルポップコーン!?チュリトス -->
+  <article class="card" id="card-5">
+    <img class="card-img" src="images/caramel-popcorn-churros.jpg" alt="キャラメルポップコーン!?チュリトス">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">⑤</div>
+        <div class="card-name">キャラメルポップコーン!?チュリトス</div>
+        <div class="card-price">¥800</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>スペースファンタジー前・ウォーターワールド前・ワンダーランド前</span>
+      </div>
+      <div class="card-desc">シナモンチュリトスにキャラメルポップコーンがのってるチュリトスです！
+いい組み合わせ🥰
+キャラメルがしっかりかかっていてなんならちょっとキャラメルが香ばしい🥺</div>
+    </div>
+  </article>
+
+  <!-- ⑥ ウィキッド・チュリトス -->
+  <article class="card" id="card-6">
+    <div class="card-img-placeholder"><span>🌿</span>チョコ未食につき画像なし😅</div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">⑥</div>
+        <div class="card-name">ウィキッド・チュリトス<br><small style="font-weight:400;font-size:0.8rem;">〜ピーナッツバターフレーバー〜</small></div>
+        <div class="card-price">¥850</div>
+      </div>
+      <div class="card-desc">上にミドリ、下にピンクのソースがかかっているチュリトス！
+実はチョコまだ食べてなくて味は不明です😅
+ただ、そんなびっくり要素はないと思うのでこれも味重視ってよりは映え重視かなって思っております👀</div>
+    </div>
+  </article>
+
+  <!-- ⑦ ターキーレッグ!?まん -->
+  <article class="card" id="card-7">
+    <img class="card-img" src="images/turkey-man.jpg" alt="ターキーレッグ!?まん">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">⑦</div>
+        <div class="card-name">ターキーレッグ!?まん</div>
+        <div class="card-price">¥850</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>スペースファンタジー前・ハリウッド前のカートで販売中</span>
+      </div>
+      <div class="card-desc">名前の通り見た目がターキーレッグのマンです！😆
+これが意外と美味しい！！（失礼😤）
+中にターキーレッグを細かく裂いた具が入っていて、持ち手のところにはウインナーが入ってます☺️</div>
+      <div class="card-note">※もしかしたらドラゴンズパール前でチョコレートチュリトスが販売中かも👀</div>
+    </div>
+  </article>
+
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+  <p class="outro-text">ということで、第２弾いかがでしたでしょうか？👀
+今回もフードカートを中心にご紹介しました！
+お肉以外にもみてるだけでお腹空きそうなフード満載ですね！✨🤤
+次回は25周年のレストランのご紹介ですお楽しみに〜！👋</p>
+
+  <div class="sign-off">
+    以上<br>
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコでした！🙌
+  </div>
+</section>
+
+<div class="article-nav">
+  <a href="meat.html" class="article-nav-prev">← お肉フードガイド</a>
+  <a href="index.html" class="article-nav-next">トップへ →</a>
+</div>
+
+<footer>
+  ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+<script>
+  const USJ_CENTER = [34.6654, 135.4323];
+
+  const spots = [
+    {
+      id: "A",
+      name: "ディスカバーユーマーケット",
+      items: "①アルトバイエルンドッグ ②マヨマヨツナマヨコーンマン ③④31コラボチュリトス",
+      latlng: [34.6668, 135.4342],
+      emoji: "🧡"
+    },
+    {
+      id: "B",
+      name: "スペースファンタジー前カート",
+      items: "⑤キャラメルポップコーン!?チュリトス ⑦ターキーレッグ!?まん",
+      latlng: [34.6673, 135.4308],
+      emoji: "🍫"
+    },
+    {
+      id: "C",
+      name: "ウォーターワールド前カート",
+      items: "⑤キャラメルポップコーン!?チュリトス",
+      latlng: [34.6648, 135.4298],
+      emoji: "🍫"
+    },
+    {
+      id: "D",
+      name: "ワンダーランド前カート",
+      items: "⑤キャラメルポップコーン!?チュリトス",
+      latlng: [34.6679, 135.4318],
+      emoji: "🍫"
+    },
+    {
+      id: "E",
+      name: "ハリウッド前カート",
+      items: "⑦ターキーレッグ!?まん",
+      latlng: [34.6670, 135.4330],
+      emoji: "🍫"
+    }
+  ];
+
+  const map = L.map('map', { zoomControl: true }).setView(USJ_CENTER, 16);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  function makeIcon(label, color) {
+    return L.divIcon({
+      html: `<div style="
+        width:32px;height:32px;border-radius:50%;
+        background:${color};color:#fff;
+        font-size:12px;font-weight:900;
+        display:flex;align-items:center;justify-content:center;
+        border:3px solid #fff;
+        box-shadow:0 2px 8px rgba(0,0,0,0.5);
+        font-family:-apple-system,sans-serif;
+      ">${label}</div>`,
+      className: '',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -18]
+    });
+  }
+
+  const colors = { A: '#b45309', B: '#dc2626', C: '#dc2626', D: '#dc2626', E: '#dc2626' };
+
+  spots.forEach(s => {
+    const marker = L.marker(s.latlng, { icon: makeIcon(s.id, colors[s.id] || '#dc2626') })
+      .addTo(map)
+      .bindPopup(`
+        <div class="popup-name">${s.emoji} ${s.name}</div>
+        <div style="margin:4px 0 2px;opacity:0.8;font-size:0.78rem;">${s.items}</div>
+      `);
+
+    const legend = document.getElementById('legend');
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="badge" style="background:${colors[s.id]}">${s.id}</span>${s.name}`;
+    item.addEventListener('click', () => {
+      map.setView(s.latlng, 18);
+      marker.openPopup();
+    });
+    legend.appendChild(item);
+  });
+</script>
+</body>
+</html>
