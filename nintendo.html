@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ニンテンドーワールド5周年フード | チョコのUSJフードガイド</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background-color: #fdf8f2;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 5% 0%, rgba(212,68,80,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 95% 100%, rgba(200,144,48,0.06) 0%, transparent 55%);
+      color: #3a2820;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP NAV ===== */
+    .top-nav {
+      background: rgba(253,244,238,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.7rem 1.4rem;
+      border-bottom: 1px solid rgba(212,68,80,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav a {
+      color: #d44050;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: #b83040; }
+
+    /* ===== HEADER ===== */
+    header {
+      background:
+        radial-gradient(ellipse at top right, rgba(212,68,80,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(200,144,48,0.18) 0%, transparent 55%),
+        linear-gradient(145deg, #fef4f0 0%, #fde8e0 50%, #fdecd8 100%);
+      padding: 2.2rem 1.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(212,68,80,0.1);
+    }
+    header::before {
+      content: "⭐";
+      font-size: 9rem;
+      position: absolute;
+      top: -1.5rem; left: -1.5rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    header::after {
+      content: "🍄";
+      font-size: 9rem;
+      position: absolute;
+      bottom: -2rem; right: -1rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(212,68,80,0.2), 0 0 0 3px rgba(212,68,80,0.1);
+    }
+    .header-text { flex: 1; }
+    .greeting { font-size: 0.82rem; color: #9a6858; margin-bottom: 0.25rem; }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, #d44050 0%, #c89030 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #9a6858; }
+    .post-date { margin-top: 0.5rem; font-size: 0.72rem; color: #c09080; opacity: 0.85; letter-spacing: 0.06em; }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #5a3828;
+      white-space: pre-line;
+    }
+
+    /* ===== ANNOUNCE BOX ===== */
+    .announce-box {
+      max-width: 680px;
+      margin: 1.4rem auto 0;
+      padding: 0 1.4rem;
+    }
+    .announce-inner {
+      background: linear-gradient(135deg, rgba(253,240,220,0.95), rgba(253,248,235,0.8));
+      border: 1px solid rgba(200,144,48,0.4);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #7a5020;
+      white-space: pre-line;
+      box-shadow: 0 4px 16px rgba(200,144,48,0.08);
+    }
+    .announce-inner strong {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.3rem;
+      color: #c07020;
+    }
+
+    /* ===== AREA TICKET BOX ===== */
+    .ticket-box {
+      max-width: 680px;
+      margin: 1.4rem auto 0;
+      padding: 0 1rem;
+    }
+    .ticket-inner {
+      background: linear-gradient(135deg, rgba(212,68,80,0.06), rgba(200,144,48,0.04));
+      border: 1px solid rgba(212,68,80,0.2);
+      border-radius: 14px;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.84rem;
+      line-height: 1.7;
+      color: #7a3838;
+      text-align: center;
+    }
+
+    /* ===== SLANG NOTE ===== */
+    .slang-note {
+      font-size: 0.75em;
+      color: #c09080;
+      font-weight: 400;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 680px;
+      margin: 1.5rem auto;
+      padding: 0 1.4rem;
+      color: #d44050;
+      font-size: 0.88rem;
+      opacity: 0.6;
+    }
+    .separator::before, .separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,68,80,0.35), transparent);
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .section-header-inner {
+      background: linear-gradient(135deg, #d44050 0%, #c05838 50%, #c89030 100%);
+      border-radius: 14px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px rgba(212,68,80,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* ===== FOOD CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid rgba(212,68,80,0.16);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 20px rgba(212,68,80,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(212,68,80,0.14), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #fdf4f0;
+    }
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+    .card-badge {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e86070, #d44050);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(212,68,80,0.35), 0 0 0 2px rgba(212,68,80,0.1);
+    }
+    .card-name {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      flex: 1;
+      color: #3a2820;
+      line-height: 1.35;
+    }
+    .card-price {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #d44050;
+      white-space: nowrap;
+    }
+    .card-location {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      background: rgba(253,248,242,0.9);
+      border: 1px solid rgba(200,144,48,0.22);
+      border-radius: 10px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #9a6838;
+    }
+    .card-location-icon { flex-shrink: 0; margin-top: 1px; }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #5a3828;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #9a8070;
+      border-left: 2px solid rgba(212,68,80,0.28);
+      background: rgba(212,68,80,0.04);
+      padding: 0.5rem 0.7rem;
+      border-radius: 0 8px 8px 0;
+      white-space: pre-line;
+    }
+
+    /* ===== LINE CHAT ===== */
+    .line-chat {
+      background: #aacfa0;
+      border-radius: 16px;
+      padding: 1rem 0.8rem;
+      margin: 0.8rem 0;
+    }
+    .line-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+      align-items: flex-end;
+    }
+    .line-row.me {
+      flex-direction: row-reverse;
+    }
+    .line-row:last-child { margin-bottom: 0; }
+    .line-avatar {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .line-bubble {
+      max-width: 78%;
+      padding: 0.5rem 0.8rem;
+      border-radius: 14px 14px 14px 3px;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+      color: #3a2820;
+    }
+    .line-row.me .line-bubble {
+      background: #9fd87a;
+      border-radius: 14px 14px 3px 14px;
+    }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #5a3828;
+      white-space: pre-line;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2.5rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #3a2820;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.76rem;
+      color: #d44050;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ===== ARTICLE NAV ===== */
+    .article-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .article-nav-next, .article-nav-prev {
+      display: inline-block;
+      color: #d44050;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.65rem 1.1rem;
+      background:
+        linear-gradient(#fffcfa, #fdf6f2) padding-box,
+        linear-gradient(135deg, rgba(212,68,80,0.28), rgba(200,144,48,0.18)) border-box;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(212,68,80,0.1);
+    }
+    .article-nav-next:hover, .article-nav-prev:hover {
+      color: #b83040;
+      box-shadow: 0 6px 20px rgba(212,68,80,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ===== IMAGE CREDIT ===== */
+    .img-credit {
+      font-size: 0.66rem;
+      text-align: right;
+      padding: 0.22rem 0.7rem;
+      background: rgba(253,244,238,0.7);
+      color: #c4a090;
+    }
+    .img-credit a { color: #b09080; text-decoration: underline; }
+    .img-credit a:hover { color: #8c6860; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 0.76rem;
+      color: #c4a090;
+      border-top: 1px solid rgba(212,68,80,0.1);
+      background: rgba(253,248,242,0.5);
+    }
+    .footer-credits {
+      max-width: 680px;
+      margin: 0 auto 0.8rem;
+      text-align: left;
+      font-size: 0.7rem;
+      line-height: 1.9;
+      color: #c4a090;
+    }
+    .footer-credits a { color: #b09080; text-decoration: underline; }
+    .footer-credits a:hover { color: #8c6860; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav"><a href="index.html">← トップへ戻る</a></nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">みなさまこんにちは＆お疲れ様です！！🙋‍♀️</p>
+      <h1>ニンテンドーワールド<br>5周年フード</h1>
+      <p class="header-sub">⭐ 5周年のフードをご紹介！✨😊</p>
+      <p class="post-date">2026/05/03 16:56</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">今回はユニバのニンテンドーワールドが５周年という事でニンテンドーワールドのフードの紹介です！✨😊
+基本的にはニンテンドーワールドのエリア内のフードになりますのでA・Bのチケットお持ちの方はぜひ食べてみてください😋</p>
+</section>
+
+<!-- ===== ANNOUNCE BOX ===== -->
+<div class="announce-box">
+  <div class="announce-inner">
+    <strong>📢 ちょっとお知らせ！</strong>チョコまだ５周年のニンテンドーエリアに行ってませんので、キノピオカフェの味の感想はリア友<span class="slang-note">（リアルの友達）</span>情報となっております🙇‍♀️
+なお感想を抜粋したところ若干読みづらくなりましたのでラインの会話でお届けします🙇‍♀️
+（💁‍♀️：チョコ、👧🏻：友達）</div>
+</div>
+
+<!-- ===== TICKET INFO ===== -->
+<div class="ticket-box">
+  <div class="ticket-inner">
+    🎫 ニンテンドーワールドは <strong>エリア入場券（A・Bチケット）</strong> が必要なエリアです
+  </div>
+</div>
+
+<div class="separator">⭐＊🍄＊⭐＊🍄＊⭐＊🍄＊⭐＊🍄＊⭐＊🍄</div>
+
+<!-- ===== キノピオカフェ ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🍄 キノピオカフェ</div>
+</div>
+<section class="cards-section">
+
+  <!-- ① スーパースター・アニバーサリープレート -->
+  <article class="card" id="card-1">
+    <img class="card-img" src="images/nintendo-anniversary-plate.jpg" alt="スーパースター・アニバーサリープレート">
+    <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/28/snw5th/" target="_blank" rel="noopener">USJ365</a></div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">①</div>
+        <div class="card-name">スーパースター・アニバーサリープレート</div>
+        <div class="card-price">¥3,500</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>キノピオカフェ（ニンテンドーワールドエリア内）</span>
+      </div>
+      <div class="line-chat">
+        <div class="line-row">
+          <span class="line-avatar">👧🏻</span>
+          <div class="line-bubble">も〜食べた？めっちゃ美味しかったで！</div>
+        </div>
+        <div class="line-row me">
+          <span class="line-avatar">💁‍♀️</span>
+          <div class="line-bubble">まだ、、プレートて何乗ってんの？</div>
+        </div>
+        <div class="line-row">
+          <span class="line-avatar">👧🏻</span>
+          <div class="line-bubble">ラザニアとキッシュ、フライドチキン、ミニサラダ、マッシュルーム、スターのパン！</div>
+        </div>
+        <div class="line-row me">
+          <span class="line-avatar">💁‍♀️</span>
+          <div class="line-bubble">思ったよかある🤣</div>
+        </div>
+        <div class="line-row">
+          <span class="line-avatar">👧🏻</span>
+          <div class="line-bubble">せやねん、結構お腹いっぱいなった😅</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ② スーパーニンテンドーアニバーサリーケーキ -->
+  <article class="card" id="card-2">
+    <img class="card-img" src="images/nintendo-anniversary-cake.jpg" alt="スーパーニンテンドーアニバーサリーケーキ">
+    <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/28/snw5th/" target="_blank" rel="noopener">USJ365</a></div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">②</div>
+        <div class="card-name">スーパーニンテンドーアニバーサリーケーキ</div>
+        <div class="card-price">¥6,000</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>キノピオカフェ（ニンテンドーワールドエリア内）</span>
+      </div>
+      <div class="line-chat">
+        <div class="line-row">
+          <span class="line-avatar">👧🏻</span>
+          <div class="line-bubble">でもケーキも食べてんやん🤣🤣</div>
+        </div>
+        <div class="line-row me">
+          <span class="line-avatar">💁‍♀️</span>
+          <div class="line-bubble">え、よー食べたな🤣</div>
+        </div>
+        <div class="line-row">
+          <span class="line-avatar">👧🏻</span>
+          <div class="line-bubble">え、ちゃうねんちゃんとホールやってん😳<br>しかも中にいちごおるけどクリームやばかった！🤣</div>
+        </div>
+      </div>
+      <div class="card-note">※調べたら「４人分」って書いてたけど嘘とのこと🤣
+「６人くらいでちょうどいいくらいちゃう？🔵」やそうです😌
+結構クリームが強敵そうですね😅</div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ===== マリオ&カフェストア ===== -->
+<div class="section-header">
+  <div class="section-header-inner">⭐ マリオ＆カフェストア</div>
+</div>
+<section class="cards-section">
+
+  <!-- ③ パンケーキサンド マンゴー -->
+  <article class="card" id="card-3">
+    <img class="card-img" src="images/nintendo-pancake-sandwich.jpg" alt="無敵!スーパースター・パンケーキサンド〜マンゴー〜">
+    <div class="img-credit">Photo: <a href="https://usj365.com/2026/03/28/snw5th/" target="_blank" rel="noopener">USJ365</a></div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">③</div>
+        <div class="card-name">無敵！スーパースター・パンケーキサンド<br><small style="font-weight:400;font-size:0.82rem;">〜マンゴー〜</small></div>
+        <div class="card-price">¥1,100</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>マリオ＆カフェストア（ニンテンドーワールドエリア内）</span>
+      </div>
+      <div class="card-desc">名前長ない！？ってゆーのは置いといて、これは食べております！😋
+正直言ったらスターと入れ替えになったルイージの方が好きやったけどこれも美味しい！
+結構ザクザクとパチパチしてて、中のクリームにも普通のクリームとマンゴーの果肉が入ったクリームが入ってていい感じです🥰
+上の部分にゼリーも乗っていて結構満足感はあります！</div>
+    </div>
+  </article>
+
+</section>
+
+<div class="separator">⭐＊🍄＊⭐＊🍄＊⭐＊🍄＊⭐＊🍄＊⭐＊🍄</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+  <p class="outro-text">今回はニンテンドーワールドの5周年フードでした！☺️
+また次回をお楽しみに〜🙋‍♀️💕</p>
+
+  <div class="sign-off">
+    以上<br>
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコでした！🙌
+  </div>
+</section>
+
+<div class="article-nav">
+  <a href="restaurant.html" class="article-nav-prev">← レストラン編</a>
+  <a href="index.html" class="article-nav-next">トップへ →</a>
+</div>
+
+<footer>
+  <div class="footer-credits">
+    【画像出典】<br>
+    ・スーパースター・アニバーサリープレート / スーパーニンテンドーアニバーサリーケーキ / パンケーキサンド：
+    <a href="https://usj365.com/2026/03/28/snw5th/" target="_blank" rel="noopener">USJ365</a>
+  </div>
+  ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+</body>
+</html>
