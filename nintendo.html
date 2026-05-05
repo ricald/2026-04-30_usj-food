@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ニンテンドーワールド5周年フード | チョコのUSJフードガイド</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -494,8 +496,6 @@
     .footer-credits a { color: #b09080; text-decoration: underline; }
     .footer-credits a:hover { color: #8c6860; }
   </style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WPgI=" crossorigin=""></script>
 </head>
 <body>
 
@@ -546,18 +546,6 @@
   <p class="map-section-title">📍 ニンテンドーワールドの場所</p>
   <div id="nintendo-map"></div>
 </section>
-<script>
-  var nintendoMap = L.map('nintendo-map', { scrollWheelZoom: false }).setView([34.6662, 135.4300], 17);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19
-  }).addTo(nintendoMap);
-  L.marker([34.6665, 135.4302]).addTo(nintendoMap)
-    .bindPopup('<b>🍄 キノピオカフェ</b><br>スーパー・ニンテンドー・ワールド内')
-    .openPopup();
-  L.marker([34.6660, 135.4296]).addTo(nintendoMap)
-    .bindPopup('<b>⭐ マリオ＆カフェストア</b><br>スーパー・ニンテンドー・ワールド内');
-</script>
 
 <!-- ===== キノピオカフェ ===== -->
 <div class="section-header">
@@ -703,6 +691,39 @@
   </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
+
+<script>
+  const nintendoMap = L.map('nintendo-map', { zoomControl: true, scrollWheelZoom: false }).setView([34.6662, 135.4300], 17);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(nintendoMap);
+
+  function makeNintendoIcon(emoji) {
+    return L.divIcon({
+      html: `<div style="
+        width:32px;height:32px;border-radius:50%;
+        background:linear-gradient(135deg,#e86070,#d44050);color:#fff;
+        font-size:15px;
+        display:flex;align-items:center;justify-content:center;
+        border:3px solid #fff;
+        box-shadow:0 2px 10px rgba(0,0,0,0.3);
+      ">${emoji}</div>`,
+      className: '',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -18]
+    });
+  }
+
+  L.marker([34.6665, 135.4302], { icon: makeNintendoIcon('🍄') })
+    .addTo(nintendoMap)
+    .bindPopup('<b>🍄 キノピオカフェ</b><br>スーパー・ニンテンドー・ワールド内')
+    .openPopup();
+  L.marker([34.6660, 135.4296], { icon: makeNintendoIcon('⭐') })
+    .addTo(nintendoMap)
+    .bindPopup('<b>⭐ マリオ＆カフェストア</b><br>スーパー・ニンテンドー・ワールド内');
+</script>
 
 </body>
 </html>
