@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>インパ情報＆お役立ちメモ | チョコのUSJフードガイド</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background-color: #f4f9fd;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 5% 0%, rgba(58,130,191,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 95% 100%, rgba(196,144,64,0.06) 0%, transparent 55%);
+      color: #1e3a50;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP NAV ===== */
+    .top-nav {
+      background: rgba(244,249,253,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.7rem 1.4rem;
+      border-bottom: 1px solid rgba(58,130,191,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav a {
+      color: #3a82bf;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: #2a6090; }
+
+    /* ===== HEADER ===== */
+    header {
+      background:
+        radial-gradient(ellipse at top right, rgba(58,130,191,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(196,144,64,0.18) 0%, transparent 55%),
+        linear-gradient(145deg, #eef6fc 0%, #ddeef8 50%, #fdf4e4 100%);
+      padding: 2.2rem 1.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(58,130,191,0.1);
+    }
+    header::before {
+      content: "☀️";
+      font-size: 9rem;
+      position: absolute;
+      top: -1.5rem; left: -1.5rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    header::after {
+      content: "🍫";
+      font-size: 9rem;
+      position: absolute;
+      bottom: -2rem; right: -1rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(58,130,191,0.2), 0 0 0 3px rgba(58,130,191,0.1);
+    }
+    .header-text { flex: 1; }
+    .greeting { font-size: 0.82rem; color: #607080; margin-bottom: 0.25rem; }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, #3a82bf 0%, #c49040 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #607080; }
+    .post-date { margin-top: 0.5rem; font-size: 0.72rem; color: #90a8c0; opacity: 0.85; letter-spacing: 0.06em; }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #2a4a62;
+      white-space: pre-line;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 680px;
+      margin: 1.5rem auto;
+      padding: 0 1.4rem;
+      color: #3a82bf;
+      font-size: 0.88rem;
+      opacity: 0.6;
+    }
+    .separator::before, .separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(58,130,191,0.35), transparent);
+    }
+
+    /* ===== SLANG NOTE ===== */
+    .slang-note {
+      font-size: 0.75em;
+      color: #90a8c0;
+      font-weight: 400;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .section-header-inner {
+      background: linear-gradient(135deg, #2a72af 0%, #3a88c8 50%, #c49040 100%);
+      border-radius: 14px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px rgba(58,130,191,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* ===== CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid rgba(58,130,191,0.16);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 20px rgba(58,130,191,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(58,130,191,0.14), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #eef6fc;
+    }
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: #2a4a62;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #607080;
+      border-left: 2px solid rgba(58,130,191,0.28);
+      background: rgba(58,130,191,0.04);
+      padding: 0.5rem 0.7rem;
+      border-radius: 0 8px 8px 0;
+      white-space: pre-line;
+    }
+
+    /* ===== WEATHER BOX ===== */
+    .weather-box {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .weather-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: linear-gradient(135deg, rgba(58,130,191,0.08), rgba(196,144,64,0.06));
+      border: 1px solid rgba(58,130,191,0.2);
+      border-radius: 20px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #2a4a62;
+    }
+    .weather-chip.hot { border-color: rgba(220,80,60,0.3); background: rgba(220,80,60,0.06); color: #a03020; }
+    .weather-chip.cold { border-color: rgba(58,130,191,0.3); background: rgba(58,130,191,0.08); color: #1a5080; }
+
+    /* ===== INFO LIST ===== */
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .info-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: #2a4a62;
+    }
+    .info-list-item .item-icon {
+      flex-shrink: 0;
+      font-size: 1rem;
+      margin-top: 0.05rem;
+    }
+    .info-list-item .item-body { flex: 1; }
+    .item-name {
+      font-weight: 800;
+      color: #1e3a50;
+    }
+    .item-date {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3a82bf, #2a68a0);
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.1rem 0.55rem;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    .item-date.warning {
+      background: linear-gradient(135deg, #e06040, #c04020);
+    }
+    .item-sub {
+      font-size: 0.78rem;
+      color: #607080;
+      margin-top: 0.15rem;
+    }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #2a4a62;
+      white-space: pre-line;
+    }
+    .next-teaser {
+      margin-top: 1.2rem;
+      background: linear-gradient(135deg, rgba(58,130,191,0.06), rgba(196,144,64,0.05));
+      border: 1px solid rgba(58,130,191,0.2);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #2a4a62;
+    }
+    .next-teaser strong {
+      display: block;
+      font-size: 0.78rem;
+      color: #3a82bf;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .next-teaser .mention {
+      font-weight: 800;
+      color: #3a82bf;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2.5rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1e3a50;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.76rem;
+      color: #3a82bf;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ===== ARTICLE NAV ===== */
+    .article-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .article-nav-next, .article-nav-prev {
+      display: inline-block;
+      color: #3a82bf;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.65rem 1.1rem;
+      background:
+        linear-gradient(#f8fcff, #f0f7fd) padding-box,
+        linear-gradient(135deg, rgba(58,130,191,0.28), rgba(196,144,64,0.18)) border-box;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(58,130,191,0.1);
+    }
+    .article-nav-next:hover, .article-nav-prev:hover {
+      color: #2a6090;
+      box-shadow: 0 6px 20px rgba(58,130,191,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 0.76rem;
+      color: #90a8c0;
+      border-top: 1px solid rgba(58,130,191,0.1);
+      background: rgba(244,249,253,0.5);
+    }
+    .footer-credits {
+      max-width: 680px;
+      margin: 0 auto 0.8rem;
+      text-align: left;
+      font-size: 0.7rem;
+      line-height: 1.9;
+      color: #90a8c0;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav"><a href="nintendo.html">← ニンテンドーワールド5周年</a></nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">みなさまこんにちは＆お疲れ様です！！🙋‍♀️</p>
+      <h1>インパ情報＆<br>お役立ちメモ</h1>
+      <p class="header-sub">☀️ 服装・休止情報・豆知識をまとめてお届け！</p>
+      <p class="post-date">2026/05/08 18:37</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">現在18:37分ですが、お昼ご飯中のユニバ非公式アンバサダー＆ランチ損害サービス執行官のチョコです！🙋‍♀️
+
+今回はこないだインパ<span class="slang-note">（入場すること）</span>した際の服装など参考になりそうな情報を詰め込んでみました😊
+当日の準備に役立てください！</p>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫</div>
+
+<!-- ===== 服装チェック ===== -->
+<div class="section-header">
+  <div class="section-header-inner">👗 服装チェック</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <p class="card-desc" style="font-weight:800; font-size:0.9rem; margin-bottom:0.8rem;">5/7（木）インパ当日の情報です！</p>
+      <div class="weather-box">
+        <span class="weather-chip hot">🌡️ 最高 26℃</span>
+        <span class="weather-chip cold">🌡️ 最低 16℃</span>
+        <span class="weather-chip">📅 5/7（木）</span>
+      </div>
+      <div class="card-desc">半袖に薄めの羽織がベスト！
+日中は本当に暑くてTシャツでしたが、17時過ぎたくらいから少し肌寒くなってきてました😃
+ユニバはほぼ屋根が無いので帽子や日傘はあった方がいいと思います🥺
+
+パーク内は早くも冷凍パインやマンゴー、いちごが販売されてました😳</div>
+    </div>
+    <img class="card-img" src="images/usj-mist-cooling.jpg" alt="パーク内の熱中症対策">
+    <div class="card-body" style="padding-top:0.8rem;">
+      <div class="card-desc">こんな感じで熱中症対策も早くも始まっておりました！☺️</div>
+    </div>
+  </article>
+</section>
+
+<!-- ===== 休止情報 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">😱 休止情報</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <ul class="info-list">
+        <li class="info-list-item">
+          <span class="item-icon">😱</span>
+          <div class="item-body">
+            <span class="item-name">フライングダイナソー</span>
+            <span class="item-date warning">〜5/31 お休み</span>
+          </div>
+        </li>
+        <li class="info-list-item">
+          <span class="item-icon">😱</span>
+          <div class="item-body">
+            <span class="item-name">ユニバーサル・モンスターライブ<br>ロックンロールショー</span>
+            <span class="item-date warning">〜5/28 お休み</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ===== その他情報 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🌟 その他情報</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <ul class="info-list">
+        <li class="info-list-item">
+          <span class="item-icon">🌟</span>
+          <div class="item-body">
+            <span class="item-name">モリバーの宴レストラン</span>
+            <span class="item-date">〜5/17まで</span>
+            <div class="item-sub">モンスターハンターコラボ</div>
+          </div>
+        </li>
+        <li class="info-list-item">
+          <span class="item-icon">🌟</span>
+          <div class="item-body">
+            <span class="item-name">ヤクルトコラボ</span>
+            <span class="item-date">〜5/31まで</span>
+            <div class="item-sub">ヤクルトソフトクリームサンデー〜マンゴー〜 ¥1,000<br>※おまけでヤクルト付いてくる🤤</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫</div>
+
+<!-- ===== 雑談コーナー ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🌼 雑談コーナー</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <div class="card-desc">ユニバのレストランにはこんなゴミ箱が置いてある所があります！</div>
+    </div>
+    <img class="card-img" src="images/usj-tray-return.jpg" alt="USJレストランのゴミ箱・お盆返却口">
+    <div class="card-body" style="padding-top:0.9rem;">
+      <div class="card-desc">ゴミ箱の上にシルバーの線があれば、ご飯の後ゴミを捨ててお盆はシルバーの線の上に置いてOK🙆‍♀️
+
+レストランによっては店員さんが下げてくださる所もありますので、レストランに入った際はゴミ箱の上も要チェックです😊</div>
+      <div class="card-note">だいぶ前に知らずに返却口を探して彷徨っておりまして、結局店員さんに聞きました😂😂</div>
+    </div>
+  </article>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+  <div class="sign-off">
+    以上<br>
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコでした！🙋‍♀️
+  </div>
+
+  <div class="next-teaser">
+    <strong>📢 次回予告</strong>
+    次回は <span class="mention">りっちゃん＠デザイン＆イラスト（トラ会員）</span> さんからもご質問いただいていた、お子様も楽しめる情報に関してお届けします‼︎
+  </div>
+</section>
+
+<div class="article-nav">
+  <a href="nintendo.html" class="article-nav-prev">← ニンテンドーワールド5周年</a>
+  <a href="index.html" class="article-nav-next">トップへ →</a>
+</div>
+
+<footer>
+  <div class="footer-credits">
+    【画像出典】<br>
+    ・掲載画像はすべてチョコちゃん撮影
+  </div>
+  ※情報は訪問日（2026/05/07）時点のものです。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+</body>
+</html>
