@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お子様おすすめ情報 | チョコの非公式ユニバ大使館</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background-color: #f4fdf7;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 5% 0%, rgba(42,142,80,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 95% 100%, rgba(112,80,160,0.06) 0%, transparent 55%);
+      color: #1a3a28;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP NAV ===== */
+    .top-nav {
+      background: rgba(244,253,247,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.7rem 1.4rem;
+      border-bottom: 1px solid rgba(42,142,80,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav a {
+      color: #2a8e50;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: #1e6a3a; }
+
+    /* ===== HEADER ===== */
+    header {
+      background:
+        radial-gradient(ellipse at top right, rgba(42,142,80,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(112,80,160,0.15) 0%, transparent 55%),
+        linear-gradient(145deg, #edfaf2 0%, #d8f2e3 50%, #f0eafc 100%);
+      padding: 2.2rem 1.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(42,142,80,0.1);
+    }
+    header::before {
+      content: "🦖";
+      font-size: 9rem;
+      position: absolute;
+      top: -1.5rem; left: -1.5rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    header::after {
+      content: "🪄";
+      font-size: 9rem;
+      position: absolute;
+      bottom: -2rem; right: -1rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(42,142,80,0.2), 0 0 0 3px rgba(42,142,80,0.1);
+    }
+    .header-text { flex: 1; }
+    .greeting { font-size: 0.82rem; color: #507060; margin-bottom: 0.25rem; }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, #2a8e50 0%, #7050a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #507060; }
+    .post-date { margin-top: 0.5rem; font-size: 0.72rem; color: #80a890; opacity: 0.85; letter-spacing: 0.06em; }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #2a4a38;
+      white-space: pre-line;
+    }
+    .mention {
+      font-weight: 800;
+      color: #2a8e50;
+    }
+    .conclusion-box {
+      margin-top: 1.2rem;
+      background: linear-gradient(135deg, rgba(42,142,80,0.08), rgba(112,80,160,0.06));
+      border: 1px solid rgba(42,142,80,0.25);
+      border-radius: 14px;
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #1a3a28;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 680px;
+      margin: 1.5rem auto;
+      padding: 0 1.4rem;
+      color: #2a8e50;
+      font-size: 0.88rem;
+      opacity: 0.6;
+    }
+    .separator::before, .separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(42,142,80,0.35), transparent);
+    }
+
+    /* ===== SLANG NOTE ===== */
+    .slang-note {
+      font-size: 0.75em;
+      color: #80a890;
+      font-weight: 400;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .section-header-inner {
+      background: linear-gradient(135deg, #1e7a40 0%, #2a8e50 50%, #7050a0 100%);
+      border-radius: 14px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px rgba(42,142,80,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* ===== CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid rgba(42,142,80,0.16);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 20px rgba(42,142,80,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(42,142,80,0.14), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #edfaf2;
+    }
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: #2a4a38;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #507060;
+      border-left: 2px solid rgba(42,142,80,0.28);
+      background: rgba(42,142,80,0.04);
+      padding: 0.5rem 0.7rem;
+      border-radius: 0 8px 8px 0;
+      white-space: pre-line;
+    }
+
+    /* ===== EVENT LIST ===== */
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .event-item {
+      border: 1px solid rgba(42,142,80,0.15);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, rgba(42,142,80,0.03), rgba(112,80,160,0.02));
+    }
+    .event-title {
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: #1a3a28;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .event-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      letter-spacing: 0.03em;
+    }
+    .event-badge.carnivore {
+      background: linear-gradient(135deg, #c04020, #a02010);
+      color: #fff;
+    }
+    .event-badge.herbivore {
+      background: linear-gradient(135deg, #2a8e50, #1e6a3a);
+      color: #fff;
+    }
+    .event-badge.rainy {
+      background: linear-gradient(135deg, #3a82bf, #2a68a0);
+      color: #fff;
+    }
+    .event-desc {
+      font-size: 0.83rem;
+      line-height: 1.8;
+      color: #3a5a48;
+      white-space: pre-line;
+    }
+    .event-note {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: #507060;
+      border-left: 2px solid rgba(42,142,80,0.25);
+      background: rgba(42,142,80,0.04);
+      padding: 0.4rem 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ===== LOCATION CHIPS ===== */
+    .location-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: rgba(42,142,80,0.07);
+      border: 1px solid rgba(42,142,80,0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.65rem;
+      color: #1e6a3a;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== CREATURE LIST ===== */
+    .creature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+    .creature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      line-height: 1.65;
+      color: #2a4a38;
+    }
+    .creature-icon { flex-shrink: 0; font-size: 1.1rem; margin-top: 0.05rem; }
+    .creature-body { flex: 1; }
+    .creature-name { font-weight: 900; color: #1a3a28; }
+    .creature-location {
+      font-size: 0.76rem;
+      color: #507060;
+      margin-top: 0.1rem;
+    }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #2a4a38;
+      white-space: pre-line;
+    }
+    .next-teaser {
+      margin-top: 1.2rem;
+      background: linear-gradient(135deg, rgba(42,142,80,0.06), rgba(112,80,160,0.05));
+      border: 1px solid rgba(42,142,80,0.2);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #2a4a38;
+    }
+    .next-teaser strong {
+      display: block;
+      font-size: 0.78rem;
+      color: #2a8e50;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2.5rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1a3a28;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.76rem;
+      color: #2a8e50;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ===== ARTICLE NAV ===== */
+    .article-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .article-nav-next, .article-nav-prev {
+      display: inline-block;
+      color: #2a8e50;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.65rem 1.1rem;
+      background:
+        linear-gradient(#f4fdf7, #ecfaf2) padding-box,
+        linear-gradient(135deg, rgba(42,142,80,0.28), rgba(112,80,160,0.18)) border-box;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(42,142,80,0.1);
+    }
+    .article-nav-next:hover, .article-nav-prev:hover {
+      color: #1e6a3a;
+      box-shadow: 0 6px 20px rgba(42,142,80,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 0.76rem;
+      color: #80a890;
+      border-top: 1px solid rgba(42,142,80,0.1);
+      background: rgba(244,253,247,0.5);
+    }
+    .footer-credits {
+      max-width: 680px;
+      margin: 0 auto 0.8rem;
+      text-align: left;
+      font-size: 0.7rem;
+      line-height: 1.9;
+      color: #80a890;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav"><a href="tips.html">← インパ情報＆お役立ちメモ</a></nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">みなさまこんにちは＆お疲れ様です！！🙋‍♀️</p>
+      <h1>お子様<br>おすすめ情報</h1>
+      <p class="header-sub">🦖 ジュラパ＆魔法界のキッズイベントをご紹介！</p>
+      <p class="post-date">2026/05/11</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">ユニバ非公式アンバサダー＆ランチ損害サービス執行官のチョコです！🙋‍♀️
+
+<span class="mention">りっちゃん＠デザイン＆イラスト（トラ会員）</span>さんからリクエストをいただいていた、お子様が楽しめるエリアのご紹介です！☺️
+
+まずは結論から😃</p>
+  <div class="conclusion-box">やっぱユニバは晴れてる日が楽しい！😆</div>
+  <p class="intro-text" style="margin-top:1rem;">「わかってるわ🫱💥」ってツッコミが入りそうなので早速いきまーす！🙋‍♀️</p>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫</div>
+
+<!-- ===== 雨の日 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🌧️ 雨の日の遊ぶ場所</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <div class="card-desc">雨の日はお子様の遊べるエリア自体かなり減ります🥹
+ワンダーランドのセサミエリアが5月10日でクローズになっているため、室内で遊ぶとなるとスヌーピーしかない状態😱
+ハローキティーのコーナーのメリーゴーランドとか屋根があるアトラクションはありますが、ミニオンエリアも遊ぶ場所が基本外になるのでかなり絞られます🥲
+
+そんな中でも！</div>
+      <div class="event-list" style="margin-top:1rem;">
+        <div class="event-item">
+          <div class="event-title">
+            ジュラシックワールド・スタンプコレクション
+            <span class="event-badge rainy">☔ 雨でもOK</span>
+          </div>
+          <div class="event-desc">４箇所のスタンプを周って１つの恐竜を完成させるというもの👀
+シンプルですが意外と楽しいです！</div>
+          <div class="location-chip">📍 ジュラパエリア内</div>
+        </div>
+      </div>
+      <div class="card-note" style="margin-top:1rem;">雨だとグリ<span class="slang-note">（グリーティング）</span>も中止になったりするので何がなんでも当日は晴れてほしい！！🌞</div>
+    </div>
+  </article>
+</section>
+
+<!-- ===== ジュラパエリア ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🦖 ジュラパエリア（晴れてたらこんな楽しい）</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <p class="card-desc" style="font-weight:800; font-size:0.9rem; margin-bottom:1rem;">ジュラシックワールドジャーニー — 全5イベント！</p>
+      <div class="event-list">
+
+        <div class="event-item">
+          <div class="event-title">
+            ① スタンプコレクション
+            <span class="event-badge rainy">☔ 雨でもOK</span>
+          </div>
+          <div class="event-desc">雨の日コーナーでも紹介した通り、４箇所のスタンプを集めて恐竜を完成させよう！</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title">
+            ② ジュラシックワールド・プラターアラート
+            <span class="event-badge carnivore">🦖 肉食系</span>
+          </div>
+          <div class="event-desc">ラプトルが来ます！しかも３匹🦖🦖🦖
+割と近くて結構鳴くので迫力満点で、後ろの方からはちょっと触ったりもできます！</div>
+          <div class="location-chip">📍 ディスカバリーレストラン前</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title">
+            ③ ジュラシックワールド・ディノエンカウンター
+            <span class="event-badge herbivore">🦕 草食系</span>
+          </div>
+          <div class="event-desc">トリケラトプスが歩いてきます！
+こっちも触れます！（小さいお子様はこっちの方が人気でした）
+
+草食系🦕の10分後に肉食系🦖が始まるので、草食系🦕で楽しんでからそのまま肉食系🦖に行くのがおすすめです！😊</div>
+          <div class="location-chip">📍 モリバーの宴レストラン前</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title">④ ジュラシックワールド・ベイビーディノアドベンチャー</div>
+          <div class="event-desc">これがめーっちゃ可愛くてですね🥺
+🦕と🦖のベビーが来るんですよ！
+流石に歩かんけど、お兄さんお姉さんに抱っこされてくるんです🥰
+
+種類はアンキロサウルス・トリケラトプス・アンキロサウルス・ヴェロキラプトルの４匹🥺
+
+前の方の場所が取れなくてもお兄さんお姉さんが周ってくれるので、ゆっくり撫で放題です🥰</div>
+          <div class="location-chip">📍 アトラクション前の緑の車付近</div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title">⑤ ジュラシックワールド・ミッションウォーク</div>
+          <div class="event-desc">ジュラパのお店・アウトフィッターズのレジ前カウンターで受付して冊子を受け取り、冊子を見ながら進めていくスタイル！
+クリアしたらステッカーがもらえます☺️
+
+謎解きはSCRAP社が作っていて普通にむずい😅
+友達と挑戦した時はヒント使ったのに１時間ちょいかかりました🤣</div>
+          <div class="location-chip">📍 アウトフィッターズ レジ前カウンター</div>
+          <div class="event-note">🦖「SCRAP社ってどこ？👀」ってなって帰ってからググったら体験型ゲーム・イベント制作会社でした！👍✨</div>
+        </div>
+
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===== 魔法界 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🪄 魔法界</div>
+</div>
+<section class="cards-section">
+  <article class="card">
+    <div class="card-body">
+      <div class="card-desc">ニュートのキャラクターが登場して、写真を一緒に撮ることができます！📸
+人が多くて紛れているのでちょっと探すの大変ですが見つけてみてください☺️</div>
+      <ul class="creature-list">
+        <li class="creature-item">
+          <span class="creature-icon">🐾</span>
+          <div class="creature-body">
+            <div class="creature-name">ピグミーパフ</div>
+            <div class="creature-location">📍 ゾンコのイタズラ専門店 or 三本の箒とハニーデュークスの間</div>
+          </div>
+        </li>
+        <li class="creature-item">
+          <span class="creature-icon">🐉</span>
+          <div class="creature-body">
+            <div class="creature-name">ベビードラゴン</div>
+            <div class="creature-location">📍 ホグズミート駅横の広場</div>
+          </div>
+        </li>
+        <li class="creature-item">
+          <span class="creature-icon">🦡</span>
+          <div class="creature-body">
+            <div class="creature-name">ニフラー</div>
+            <div class="creature-location">📍 オウルポスト前</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <img class="card-img" src="images/harry-potter-niffler.jpg" alt="ニフラー">
+    <div class="card-body" style="padding-top:0.9rem;">
+      <div class="card-desc">📸 激写したニフラー🦡 めちゃくちゃかわいい…🥺</div>
+    </div>
+  </article>
+</section>
+
+<div class="separator">🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫＊🍫</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+  <p class="outro-text">以上お子様のおすすめ情報でした！🙋‍♀️
+
+大事なのでもっかい言いますが、、、、</p>
+  <div class="conclusion-box" style="margin:1rem 0;">やっぱユニバは晴れてる日が楽しい！😆</div>
+  <p class="outro-text">晴れてくれることを全力で願ってます‼︎</p>
+
+  <div class="sign-off">
+    以上<br>
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコでした！🙋‍♀️
+  </div>
+
+  <div class="next-teaser">
+    <strong>📢 次回予告</strong>
+    次回はお土産情報です、お楽しみに〜！🥰
+  </div>
+</section>
+
+<div class="article-nav">
+  <a href="tips.html" class="article-nav-prev">← インパ情報＆お役立ちメモ</a>
+  <a href="index.html" class="article-nav-next">トップへ →</a>
+</div>
+
+<footer>
+  <div class="footer-credits">
+    【画像出典】<br>
+    ・掲載画像はすべてチョコちゃん撮影
+  </div>
+  ※情報は訪問日時点のものです。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d3f9f3441ce14d39a5a5cf704b3a2bf7"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
