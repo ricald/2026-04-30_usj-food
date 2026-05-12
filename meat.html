@@ -671,7 +671,7 @@
 
 <script>
   // USJ中心座標
-  const USJ_CENTER = [34.6654, 135.4323];
+  const USJ_CENTER = [34.6651, 135.4310];
 
   const spots = [
     {
@@ -679,7 +679,7 @@
       name: "① チャイニーズポークリブ",
       snack: "サンフランシスコスナック",
       price: "¥1,000",
-      latlng: [34.6664, 135.4308],
+      latlng: [34.6640, 135.4316],
       emoji: "🍖"
     },
     {
@@ -687,7 +687,7 @@
       name: "② ターキーレッグ",
       snack: "スプラッシュダウンスナック",
       price: "¥1,400",
-      latlng: [34.6645, 135.4340],
+      latlng: [34.6645, 135.4308],
       emoji: "🍗"
     },
     {
@@ -695,7 +695,7 @@
       name: "③ ブラックペッパーポークリブ",
       snack: "サバイバルスナック",
       price: "¥1,000",
-      latlng: [34.6638, 135.4348],
+      latlng: [34.6652, 135.4302],
       emoji: "🥩"
     },
     {
@@ -703,7 +703,7 @@
       name: "④ サメのエジキ",
       snack: "シャークスナック",
       price: "¥1,000",
-      latlng: [34.6635, 135.4333],
+      latlng: [34.6660, 135.4318],
       emoji: "🍖"
     },
     {
@@ -711,13 +711,13 @@
       name: "⑤ スモークチキン",
       snack: "アミティースナック",
       price: "¥1,300",
-      latlng: [34.6632, 135.4328],
+      latlng: [34.6659, 135.4313],
       emoji: "🐔"
     }
   ];
 
   // Create map
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView(USJ_CENTER, 17);
+  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView(USJ_CENTER, 16);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',

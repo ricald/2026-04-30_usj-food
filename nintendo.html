@@ -693,7 +693,7 @@
 </footer>
 
 <script>
-  const nintendoMap = L.map('nintendo-map', { zoomControl: true, scrollWheelZoom: false }).setView([34.6662, 135.4300], 17);
+  const nintendoMap = L.map('nintendo-map', { zoomControl: true, scrollWheelZoom: false }).setView([34.6680, 135.4302], 17);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19
@@ -716,11 +716,11 @@
     });
   }
 
-  L.marker([34.6665, 135.4302], { icon: makeNintendoIcon('🍄') })
+  L.marker([34.6679, 135.4302], { icon: makeNintendoIcon('🍄') })
     .addTo(nintendoMap)
     .bindPopup('<b>🍄 キノピオカフェ</b><br>スーパー・ニンテンドー・ワールド内')
     .openPopup();
-  L.marker([34.6660, 135.4296], { icon: makeNintendoIcon('⭐') })
+  L.marker([34.6677, 135.4305], { icon: makeNintendoIcon('⭐') })
     .addTo(nintendoMap)
     .bindPopup('<b>⭐ マリオ＆カフェストア</b><br>スーパー・ニンテンドー・ワールド内');
 </script>
