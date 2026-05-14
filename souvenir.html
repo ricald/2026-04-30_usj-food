@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お土産ガイド | チョコの非公式ユニバ大使館</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background-color: #fffbf0;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 5% 0%, rgba(184,140,40,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 95% 100%, rgba(200,100,50,0.07) 0%, transparent 55%);
+      color: #2e200a;
+      min-height: 100vh;
+    }
+
+    /* ===== TOP NAV ===== */
+    .top-nav {
+      background: rgba(255,251,240,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.7rem 1.4rem;
+      border-bottom: 1px solid rgba(184,140,40,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav a {
+      color: #a06800;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover { color: #7a5000; }
+
+    /* ===== HEADER ===== */
+    header {
+      background:
+        radial-gradient(ellipse at top right, rgba(212,160,50,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(200,100,50,0.15) 0%, transparent 55%),
+        linear-gradient(145deg, #fff8e8 0%, #fff0d0 50%, #ffecc0 100%);
+      padding: 2.2rem 1.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(184,140,40,0.15);
+    }
+    header::before {
+      content: "🎁";
+      font-size: 7rem;
+      position: absolute;
+      top: -1rem; left: -1rem;
+      opacity: 0.08;
+      pointer-events: none;
+      line-height: 1;
+    }
+    header::after {
+      content: "✧";
+      font-size: 9rem;
+      position: absolute;
+      bottom: -2rem; right: -1rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .choco-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 6px 20px rgba(184,140,40,0.22), 0 0 0 3px rgba(184,140,40,0.1);
+    }
+    .header-text { flex: 1; }
+    .greeting { font-size: 0.82rem; color: #8a6820; margin-bottom: 0.25rem; }
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, #b07010 0%, #d4940a 60%, #c85820 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-sub { font-size: 0.82rem; line-height: 1.6; color: #8a6820; }
+    .post-date { margin-top: 0.5rem; font-size: 0.72rem; color: #b08840; opacity: 0.85; letter-spacing: 0.06em; }
+
+    /* ===== INTRO ===== */
+    .intro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.4rem 0;
+    }
+    .intro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #3a2810;
+      white-space: pre-line;
+    }
+
+    /* ===== SLANG NOTE ===== */
+    .slang-note {
+      font-size: 0.75em;
+      color: #a08040;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* ===== SEPARATOR ===== */
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 680px;
+      margin: 1.5rem auto;
+      padding: 0 1.4rem;
+      color: #b08840;
+      font-size: 0.88rem;
+      opacity: 0.6;
+    }
+    .separator::before, .separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(184,140,40,0.45), transparent);
+    }
+    .lead-in {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #a06800;
+      padding: 0.5rem 1rem 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-header {
+      max-width: 680px;
+      margin: 0.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .section-header-inner {
+      background: linear-gradient(135deg, #9a6800 0%, #c48010 50%, #d4940a 100%);
+      border-radius: 14px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px rgba(184,140,40,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* ===== TIP BOX ===== */
+    .tip-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+    }
+    .tip-box {
+      background: linear-gradient(135deg, rgba(255,248,224,0.95), rgba(255,240,200,0.8));
+      border: 1px solid rgba(184,140,40,0.35);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: #4a3010;
+      white-space: pre-line;
+      box-shadow: 0 4px 16px rgba(184,140,40,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+    .tip-box-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #a06800;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.03em;
+    }
+    .tip-list {
+      list-style: none;
+      padding: 0;
+    }
+    .tip-list li {
+      padding: 0.45rem 0;
+      border-bottom: 1px dashed rgba(184,140,40,0.2);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #4a3010;
+    }
+    .tip-list li:last-child { border-bottom: none; }
+    .tip-list li::before {
+      content: "✔ ";
+      color: #c48010;
+      font-weight: 700;
+    }
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.7rem;
+      font-size: 0.84rem;
+    }
+    .company-table th {
+      background: rgba(184,140,40,0.15);
+      color: #7a5000;
+      font-weight: 900;
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(184,140,40,0.25);
+    }
+    .company-table td {
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid rgba(184,140,40,0.12);
+      color: #4a3010;
+    }
+    .company-table tr:last-child td { border-bottom: none; }
+
+    /* ===== CARDS ===== */
+    .cards-section {
+      padding: 1.5rem 1rem 1rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .subsection-title {
+      font-size: 0.96rem;
+      font-weight: 900;
+      color: #9a6800;
+      margin: 0.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+    .subsection-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(184,140,40,0.4), transparent);
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid rgba(184,140,40,0.18);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 20px rgba(184,140,40,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(184,140,40,0.14), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #fff8e8;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #fff8e8 0%, #fff0d0 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: #c09040;
+      font-size: 0.85rem;
+    }
+    .card-img-placeholder span { font-size: 3rem; }
+
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+    .card-badge {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4940a, #c47810);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(184,140,40,0.4), 0 0 0 2px rgba(184,140,40,0.12);
+    }
+    .card-name {
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      flex: 1;
+      color: #2e200a;
+    }
+    .card-price {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #a06800;
+      white-space: nowrap;
+    }
+    .card-location {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      background: rgba(255,248,224,0.9);
+      border: 1px solid rgba(184,140,40,0.22);
+      border-radius: 10px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #7a5820;
+    }
+    .card-location-icon { flex-shrink: 0; margin-top: 1px; }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #3a2810;
+      white-space: pre-line;
+    }
+    .card-note {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #907040;
+      border-left: 2px solid rgba(184,140,40,0.35);
+      background: rgba(184,140,40,0.05);
+      padding: 0.5rem 0.7rem;
+      border-radius: 0 8px 8px 0;
+      white-space: pre-line;
+    }
+
+    /* ===== COLLECTABLE SECTION ===== */
+    .collectable-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1rem 1.5rem;
+    }
+    .collectable-box {
+      background: #ffffff;
+      border: 1px solid rgba(184,140,40,0.18);
+      border-radius: 20px;
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 20px rgba(184,140,40,0.07);
+    }
+    .collectable-box-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #9a6800;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.02em;
+    }
+    .collectable-desc {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: #3a2810;
+      white-space: pre-line;
+    }
+    .item-inline {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed rgba(184,140,40,0.18);
+    }
+    .item-inline:last-child { border-bottom: none; }
+    .item-inline-name {
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: #2e200a;
+    }
+    .item-inline-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #a06800;
+      white-space: nowrap;
+    }
+    .item-inline-desc {
+      font-size: 0.8rem;
+      color: #6a4820;
+      line-height: 1.5;
+    }
+
+    /* ===== OUTRO ===== */
+    .outro-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 1rem;
+    }
+    .outro-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #3a2810;
+      white-space: pre-line;
+    }
+    .sign-off {
+      text-align: center;
+      margin: 2.5rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #2e200a;
+      line-height: 1.7;
+    }
+    .sign-off .role {
+      display: block;
+      font-size: 0.76rem;
+      color: #a06800;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ===== ARTICLE NAV ===== */
+    .article-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .article-nav-next, .article-nav-prev {
+      display: inline-block;
+      color: #a06800;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 0.65rem 1.1rem;
+      background:
+        linear-gradient(#fffcf5, #fff8e8) padding-box,
+        linear-gradient(135deg, rgba(184,140,40,0.3), rgba(200,100,50,0.18)) border-box;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      transition: color 0.2s, box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(184,140,40,0.1);
+    }
+    .article-nav-next:hover, .article-nav-prev:hover {
+      color: #7a5000;
+      box-shadow: 0 6px 20px rgba(184,140,40,0.22);
+      transform: translateY(-1px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 0.76rem;
+      color: #c0a060;
+      border-top: 1px solid rgba(184,140,40,0.12);
+      background: rgba(255,248,224,0.5);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav"><a href="index.html">← トップへ戻る</a></nav>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <img class="choco-img" src="images/choco.jpg" alt="チョコちゃん">
+    <div class="header-text">
+      <p class="greeting">みなさまこんにちは＆お疲れ様です！🙋‍♀️</p>
+      <h1>お土産ガイド🎁</h1>
+      <p class="header-sub">「ここ見るといいよ！」のポイントまとめました☺️</p>
+      <p class="post-date">2026/05/14 15:50</p>
+    </div>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro-section">
+  <p class="intro-text">早いもんで明後日はユニバ当日ですね！😊
+そんな中でのぎりぎり投稿の内容はお土産についてです！🎁
+いつもは「これいいよ、おすすめ！」というものをピックしているのですが、「お土産は好きなもの買いたい！」って方もいらっしゃると思うので今回は「ここ見るといいよ！」のポイントをまとめてみました☺️
+ではでは早速見てみましょ〜!!👀</p>
+</section>
+
+<div class="separator">🐳＊🫖＊🍎＊🕶️＊🕯️＊🕊️＊🐈‍⬛＊🍄＊🍫＊🎁＊🐳</div>
+
+<!-- ===== SHOP TIPS ===== -->
+<section class="tip-section">
+  <div class="tip-box">
+    <div class="tip-box-title">🏪 まず品数が多いのはここ！</div>
+    パーク入ってすぐの <strong>ユニバーサルスタジオストア</strong> や <strong>ユニバーサルスタジオセレクト・ロデオドライブスーベニア</strong> はほぼほぼ揃ってしまうくらいにはお菓子や服、被り物など置いてあります！
+ワンコたちの服まであります🐶
+
+「このキャラクターが好き！」などあればお菓子以外は <strong>各エリアのショップ</strong> の方が可愛いのあります🙋‍♀️
+チョコが絶対見てしまうのは <strong>スヌーピーエリア</strong> と <strong>魔法界のショップ</strong> です☺️
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">🌟 食べ物系を選ぶときのポイント！</div>
+    食べ物系のお土産を買うかどうかの決め手になるのが値段と美味しさ😃
+    そこでポイントになるのが <strong>裏面に書いてる会社名！</strong>
+
+    <table class="company-table">
+      <tr>
+        <th>ジャンル</th>
+        <th>注目メーカー</th>
+      </tr>
+      <tr>
+        <td>スープ・麺系</td>
+        <td>日清・エースコック</td>
+      </tr>
+      <tr>
+        <td>お菓子系</td>
+        <td>ユーハイム・YOKU MOKU</td>
+      </tr>
+    </table>
+
+    実は「いや絶対美味しいやん！😋」ってなるような会社から出てるお土産もあります！
+ユーハイムやとバームクーヘンは絶対美味しいし、YOKU MOKUやと焼き菓子系は外さないと思います！
+  </div>
+</section>
+
+<div class="separator">🐳＊🫖＊🍎＊🕶️＊🕯️＊🕊️＊🐈‍⬛＊🍄＊🍫＊🎁＊🐳</div>
+
+<p class="lead-in">「あのお喋りなチョコが？ほんまに今回はおすすめなし？？😮」<br>と思ったそこのあなた！🫵💥<br>安心してください😌<br>🎁 やっぱり言っちゃう！チョコのおすすめお土産紹介〜！！👏👏</p>
+
+<!-- ===== おすすめ お土産 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🎁 チョコのおすすめお土産</div>
+</div>
+
+<section class="cards-section">
+
+  <p class="subsection-title">🌼 服系</p>
+
+  <!-- ユニバーサルスタジオセレクト -->
+  <article class="card" id="card-clothes">
+    <img class="card-img" src="images/usj-select-vintage.jpg" alt="ユニバーサルスタジオセレクトのヴィンテージ感のある服">
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-name">ユニバーサルスタジオセレクト</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>ユニバーサルスタジオセレクト（パーク入ってすぐ付近）</span>
+      </div>
+      <div class="card-desc">「服はユニバ以外でも使えるやつにしたい！」「ユニバ終わったら部屋着行きや〜😑」という方はぜひここへ！
+商品数こそ少ないんですが、<strong>パークの外でも着れるような服</strong>があります！
+お値段は少し高めですが、フィリックス<span class="slang-note">（フィリックス・ザ・キャット）</span>など昔のキャラクターのグッズもあったりします。
+
+こんな感じのが販売されてます！😊
+買うかめーっちゃ迷ってまだ買えてないんですが、ヴィンテージ感があっていい感じです🧡</div>
+      <div class="card-note">今は店舗前でウィキッドのグリ<span class="slang-note">（グリーティング＝キャラクターに会えるイベント）</span>などやっているのでウィキッドのグッズも販売中です！</div>
+    </div>
+  </article>
+
+  <p class="subsection-title">🌼 お菓子系（カリフォルニア・コンフェクショナリー）</p>
+
+  <!-- ヨッシーのキャンディー -->
+  <article class="card" id="card-yoshi">
+    <div class="card-img-placeholder"><span>🍬</span>ヨッシーのキャンディー</div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">①</div>
+        <div class="card-name">ヨッシーのキャンディー</div>
+        <div class="card-price">¥2,400</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>カリフォルニア・コンフェクショナリー（ハリウッドエリア）</span>
+      </div>
+      <div class="card-desc">ヨッシーの入れ物に入ってる飴🍬
+結構ヨッシー自身がしっかりしてて食べた後は飾れます☺️</div>
+    </div>
+  </article>
+
+  <!-- 抹茶キューブクッキー -->
+  <article class="card" id="card-matcha">
+    <div class="card-img-placeholder"><span>🍪</span>抹茶キューブクッキー</div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">②</div>
+        <div class="card-name">抹茶キューブクッキー</div>
+        <div class="card-price">¥1,400</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>カリフォルニア・コンフェクショナリー（ハリウッドエリア）</span>
+      </div>
+      <div class="card-desc">YOKU MOKUから出ているクッキーです！
+ほろほろでめ〜ちゃ抹茶！😋
+個包装で4つ入ってて（1個に2つ入り）、入り数は少なめですが買う価値ありのクッキーです🍪</div>
+    </div>
+  </article>
+
+  <!-- アソートスウィーツ -->
+  <article class="card" id="card-assort">
+    <div class="card-img-placeholder"><span>🍰</span>アソートスウィーツ</div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">③</div>
+        <div class="card-name">アソートスウィーツ</div>
+        <div class="card-price">¥1,800</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>カリフォルニア・コンフェクショナリー（ハリウッドエリア）</span>
+      </div>
+      <div class="card-desc">ユーハイムから出てるやつです！
+中はバームクーヘンとクッキー２種類入っています！😊</div>
+    </div>
+  </article>
+
+  <!-- イカ天スナック -->
+  <article class="card" id="card-ikatena">
+    <div class="card-img-placeholder"><span>🦑</span>イカ天スナック</div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-badge">④</div>
+        <div class="card-name">イカ天スナック</div>
+        <div class="card-price">¥1,600</div>
+      </div>
+      <div class="card-location">
+        <span class="card-location-icon">📍</span>
+        <span>カリフォルニア・コンフェクショナリー（ハリウッドエリア）</span>
+      </div>
+      <div class="card-desc">レモンのパウダーがかかっていて美味しいです！
+味は結構レモンで後からイカ天が来る感じです🍻
+個包装になっててばらまき用にもおすすめです！</div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ===== コレクタブル＆魔法界 ===== -->
+<div class="section-header">
+  <div class="section-header-inner">🌼 最近密かにハマっているお土産と魔法界</div>
+</div>
+
+<section class="collectable-section" style="padding-top: 1.5rem;">
+  <div class="collectable-box">
+    <div class="collectable-box-title">🪄 コレクタブル系</div>
+    <div class="collectable-desc">最近、各店舗でコレクタブル系が多く販売されてます！
+数や種類が多いので、もし好きなシリーズのコレクタブルがあれば記念におすすめです！
+ランダムやから開ける時のワクワクも楽しめるし、大きくないので飾っても邪魔にならないです✨
+価格は1,200円くらいのが多い印象です😃
+
+チョコは今ファンタビ<span class="slang-note">（ファンタスティック・ビースト）</span>の杖のミニチュアコレクタブルを集めております🪄</div>
+    <div style="margin-top: 0.8rem;">
+      <div class="item-inline">
+        <div class="item-inline-name">杖ミニチュアコレクタブル</div>
+        <div class="item-inline-price">¥1,900</div>
+        <div class="item-inline-desc">ファンタビシリーズ</div>
+      </div>
+      <div class="item-inline">
+        <div class="item-inline-name">各種コレクタブル</div>
+        <div class="item-inline-price">¥1,200前後</div>
+        <div class="item-inline-desc">ランダムで当たりを引く楽しさも◎</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collectable-box">
+    <div class="collectable-box-title">🦉 フィルチの没収品店（魔法界）</div>
+    <div class="collectable-desc">フィルチの没収品店には他にも面白い商品があります！🙋‍♀️</div>
+    <div style="margin-top: 0.8rem;">
+      <div class="item-inline">
+        <div class="item-inline-name">しのびの地図</div>
+        <div class="item-inline-price">¥3,400</div>
+        <div class="item-inline-desc">どこにイタズラ行くんか知らんけど絶対いらん😑 メモ帳とかノート？って思ったんですがぜんぜんちゃいました、ただのしのびの地図でした</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator">🐳＊🫖＊🍎＊🕶️＊🕯️＊🕊️＊🐈‍⬛＊🍄＊🍫＊🎁＊🐳</div>
+
+<!-- ===== OUTRO ===== -->
+<section class="outro-section">
+  <p class="outro-text">以上お土産紹介でした！
+チョコは金曜日は何がなんでも残業しないと心に誓っています🔥
+ちなみに遠足の前の夜でもしっかり爆睡できるタイプです🙋‍♀️
+いろいろご紹介はしましたが、「楽しめれば全てよし！」ということで当日は全力で楽しみましょう!!😆</p>
+
+  <div class="sign-off">
+    <span class="role">ユニバ非公式アンバサダー＆ランチ損害サービス執行官</span>
+    チョコ 🍫
+  </div>
+</section>
+
+<!-- ===== ARTICLE NAV ===== -->
+<div class="article-nav">
+  <a href="kids.html" class="article-nav-prev">← お子様おすすめ情報</a>
+  <span></span>
+</div>
+
+<footer>
+  ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
+</footer>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d3f9f3441ce14d39a5a5cf704b3a2bf7"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
