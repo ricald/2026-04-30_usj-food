@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お土産ガイド | チョコの非公式ユニバ大使館</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -462,6 +464,80 @@
       transform: translateY(-1px);
     }
 
+    /* ===== MAP ===== */
+    .map-section {
+      padding: 2rem 1rem;
+      background: linear-gradient(180deg, rgba(255,251,240,0.5) 0%, rgba(255,248,224,0.9) 100%);
+    }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #a06800;
+      text-align: center;
+      margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: linear-gradient(90deg, #c48010, #d4940a);
+      border-radius: 2px;
+      margin: 0.4rem auto 0;
+    }
+    #map {
+      width: 100%;
+      height: 340px;
+      border-radius: 18px;
+      border: 1px solid rgba(184,140,40,0.22);
+      box-shadow: 0 6px 24px rgba(184,140,40,0.1);
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.76rem;
+      background: rgba(255,250,235,0.95);
+      border: 1px solid rgba(184,140,40,0.25);
+      border-radius: 20px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      color: #3a2810;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .legend-item:hover { background: rgba(255,244,210,1); border-color: rgba(184,140,40,0.5); }
+    .badge-map {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d4940a, #c47810);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .leaflet-popup-content-wrapper {
+      background: #fffcf5;
+      color: #2e200a;
+      border: 1px solid rgba(184,140,40,0.38);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(184,140,40,0.12);
+    }
+    .leaflet-popup-tip { background: #fffcf5; }
+    .leaflet-popup-content { font-size: 0.84rem; line-height: 1.5; }
+    .popup-name { font-weight: 900; font-size: 0.95rem; color: #a06800; }
+    .popup-sub { color: #7a5820; font-size: 0.78rem; margin-top: 0.2rem; }
+
     /* ===== IMAGE CREDIT ===== */
     .img-credit {
       font-size: 0.66rem;
@@ -510,6 +586,13 @@
 </section>
 
 <div class="separator">🐳＊🫖＊🍎＊🕶️＊🕯️＊🕊️＊🐈‍⬛＊🍄＊🍫＊🎁＊🐳</div>
+
+<!-- ===== MAP ===== -->
+<section class="map-section">
+  <p class="section-title">🗺️ お土産ショップ マップ</p>
+  <div id="map"></div>
+  <div class="map-legend" id="legend"></div>
+</section>
 
 <!-- ===== SHOP TIPS ===== -->
 <section class="tip-section">
@@ -577,7 +660,7 @@
 
 こんな感じのが販売されてます！😊
 買うかめーっちゃ迷ってまだ買えてないんですが、ヴィンテージ感があっていい感じです🧡</div>
-      <div class="card-note">今は店舗前でウィキッドのグリ<span class="slang-note">（グリーティング＝キャラクターに会えるイベント）</span>などやっているのでウィキッドのグッズも販売中です！</div>
+      <div class="card-note">今は店舗前でウィキッド<span class="slang-note">（2024年公開のミュージカル映画。緑色の魔女エルファバと良き魔女グリンダの物語）</span>のグリ<span class="slang-note">（グリーティング＝キャラクターに会えるイベント）</span>などやっているのでウィキッドのグッズも販売中です！</div>
     </div>
   </article>
 
@@ -696,7 +779,7 @@
     <img class="card-img" src="images/marauders-map.jpg" alt="しのびの地図（マローダーズ・マップ）" style="border-radius: 14px 14px 0 0; margin: -1.4rem -1.4rem 1rem; width: calc(100% + 2.8rem);">
     <div class="img-credit" style="margin: -1rem -1.4rem 1rem; border-radius: 0;">Photo: <a href="https://mahoukai.com/article/405043185.html" target="_blank" rel="noopener">魔法界ドットコム</a></div>
     <div class="collectable-box-title">🦉 フィルチの没収品店（魔法界）</div>
-    <div class="collectable-desc">フィルチの没収品店には他にも面白い商品があります！🙋‍♀️</div>
+    <div class="collectable-desc">フィルチ<span class="slang-note">（ハリー・ポッターに登場するホグワーツ魔法学校の管理人。生徒たちのイタズラ道具を没収することで有名なキャラクター）</span>の没収品店には他にも面白い商品があります！🙋‍♀️</div>
     <div style="margin-top: 0.8rem;">
       <div class="item-inline">
         <div class="item-inline-name">しのびの地図</div>
@@ -737,6 +820,74 @@
   </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
+
+<script>
+  const USJ_CENTER = [34.6672, 135.4335];
+
+  const shops = [
+    {
+      id: "A",
+      name: "ユニバーサル・スタジオ・ストア",
+      sub: "全般｜パーク入口すぐ",
+      latlng: [34.6666613, 135.4352874],
+      emoji: "🎁"
+    },
+    {
+      id: "B",
+      name: "ユニバーサルスタジオセレクト",
+      sub: "服・グッズ｜パーク入口付近",
+      latlng: [34.6661999, 135.4334010],
+      emoji: "👕"
+    },
+    {
+      id: "C",
+      name: "カリフォルニア・コンフェクショナリー",
+      sub: "お菓子・スウィーツ｜ハリウッドエリア",
+      latlng: [34.6666061, 135.4347162],
+      emoji: "🍬"
+    },
+    {
+      id: "D",
+      name: "フィルチの没収品店",
+      sub: "魔法界グッズ｜ホグズミード村",
+      latlng: [34.6688968, 135.4318201],
+      emoji: "🪄"
+    }
+  ];
+
+  const map = L.map('map').setView(USJ_CENTER, 16);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  function makeIcon(emoji) {
+    return L.divIcon({
+      html: `<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#d4940a,#c47810);display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 3px 8px rgba(184,140,40,0.5);border:2px solid #fff;">${emoji}</div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      popupAnchor: [0, -18],
+      className: ''
+    });
+  }
+
+  shops.forEach(shop => {
+    const marker = L.marker(shop.latlng, { icon: makeIcon(shop.emoji) }).addTo(map);
+    marker.bindPopup(`<div class="popup-name">${shop.id}. ${shop.name}</div><div class="popup-sub">${shop.sub}</div>`);
+  });
+
+  // 凡例
+  const legend = document.getElementById('legend');
+  shops.forEach(shop => {
+    const item = document.createElement('button');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="badge-map">${shop.emoji}</span>${shop.id}. ${shop.name}`;
+    item.addEventListener('click', () => {
+      map.setView(shop.latlng, 18);
+    });
+    legend.appendChild(item);
+  });
+</script>
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d3f9f3441ce14d39a5a5cf704b3a2bf7"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
