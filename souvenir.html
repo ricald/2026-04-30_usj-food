@@ -462,6 +462,17 @@
       transform: translateY(-1px);
     }
 
+    /* ===== IMAGE CREDIT ===== */
+    .img-credit {
+      font-size: 0.66rem;
+      text-align: right;
+      padding: 0.22rem 0.7rem;
+      background: rgba(255,248,224,0.7);
+      color: #c0a060;
+    }
+    .img-credit a { color: #b09050; text-decoration: underline; }
+    .img-credit a:hover { color: #8a6830; }
+
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -574,7 +585,8 @@
 
   <!-- ヨッシーのキャンディー -->
   <article class="card" id="card-yoshi">
-    <div class="card-img-placeholder"><span>🍬</span>ヨッシーのキャンディー</div>
+    <img class="card-img" src="images/yoshi-candy.jpg" alt="ヨッシーのキャンディー">
+    <div class="img-credit">Photo: <a href="https://usj365.com/2024/01/10/2024-yoshi/" target="_blank" rel="noopener">USJ365</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">①</div>
@@ -611,7 +623,8 @@
 
   <!-- アソートスウィーツ -->
   <article class="card" id="card-assort">
-    <div class="card-img-placeholder"><span>🍰</span>アソートスウィーツ</div>
+    <img class="card-img" src="images/assort-sweets.jpg" alt="アソートスウィーツ">
+    <div class="img-credit">Photo: <a href="https://www.onlinestore.usj.co.jp/products/2468929999993" target="_blank" rel="noopener">USJ公式オンラインストア</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">③</div>
@@ -629,7 +642,8 @@
 
   <!-- イカ天スナック -->
   <article class="card" id="card-ikatena">
-    <div class="card-img-placeholder"><span>🦑</span>イカ天スナック</div>
+    <img class="card-img" src="images/ika-ten-snack.jpg" alt="イカ天スナック">
+    <div class="img-credit">Photo: <a href="https://usj365.com/2023/05/28/snoopy-snack202300528/" target="_blank" rel="noopener">USJ365</a></div>
     <div class="card-body">
       <div class="card-header">
         <div class="card-badge">④</div>
@@ -655,6 +669,8 @@
 
 <section class="collectable-section" style="padding-top: 1.5rem;">
   <div class="collectable-box">
+    <img class="card-img" src="images/fantabi-wand-collectible.jpg" alt="ファンタスティック・ビーストの杖ミニチュアコレクタブル" style="border-radius: 14px 14px 0 0; margin: -1.4rem -1.4rem 1rem; width: calc(100% + 2.8rem);">
+    <div class="img-credit" style="margin: -1rem -1.4rem 1rem; border-radius: 0;">Photo: <a href="https://mahoukai.com/article/usj-harry-potter-new-items-080220252220003.html" target="_blank" rel="noopener">魔法界ドットコム</a></div>
     <div class="collectable-box-title">🪄 コレクタブル系</div>
     <div class="collectable-desc">最近、各店舗でコレクタブル系が多く販売されてます！
 数や種類が多いので、もし好きなシリーズのコレクタブルがあれば記念におすすめです！
@@ -677,6 +693,8 @@
   </div>
 
   <div class="collectable-box">
+    <img class="card-img" src="images/marauders-map.jpg" alt="しのびの地図（マローダーズ・マップ）" style="border-radius: 14px 14px 0 0; margin: -1.4rem -1.4rem 1rem; width: calc(100% + 2.8rem);">
+    <div class="img-credit" style="margin: -1rem -1.4rem 1rem; border-radius: 0;">Photo: <a href="https://mahoukai.com/article/405043185.html" target="_blank" rel="noopener">魔法界ドットコム</a></div>
     <div class="collectable-box-title">🦉 フィルチの没収品店（魔法界）</div>
     <div class="collectable-desc">フィルチの没収品店には他にも面白い商品があります！🙋‍♀️</div>
     <div style="margin-top: 0.8rem;">
@@ -711,6 +729,12 @@
 </div>
 
 <footer>
+  <div style="max-width:680px; margin:0 auto 0.8rem; text-align:left; font-size:0.7rem; line-height:1.9; color:#c0a060;">
+    【画像出典】<br>
+    ・ヨッシーのキャンディー / イカ天スナック：<a href="https://usj365.com/" target="_blank" rel="noopener" style="color:#b09050;">USJ365</a><br>
+    ・アソートスウィーツ：<a href="https://www.onlinestore.usj.co.jp/" target="_blank" rel="noopener" style="color:#b09050;">USJ公式オンラインストア</a><br>
+    ・杖ミニチュアコレクタブル / しのびの地図：<a href="https://mahoukai.com/" target="_blank" rel="noopener" style="color:#b09050;">魔法界ドットコム</a>
+  </div>
   ※価格・販売状況は変更になる場合があります。最新情報はパーク公式サイトをご確認ください。
 </footer>
 
